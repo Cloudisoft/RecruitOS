@@ -88,8 +88,8 @@ export function ProjectDetail() {
                     ) : (
                       <div className="space-y-2">
                         {tasksQ.data!.map((t: any) => (
-                          <div key={t.id} className="flex items-center justify-between rounded-lg border border-[#22232b] bg-[#101116] p-3 text-sm">
-                            <span className="text-gray-200">{t.title}</span>
+                          <div key={t.id} className="flex items-center justify-between rounded-lg border border-[#e5e7eb] bg-[#f8fafc] p-3 text-sm">
+                            <span className="text-gray-800">{t.title}</span>
                             <div className="flex items-center gap-2">
                               <Badge color="orange">{t.priority}</Badge>
                               <Badge color="blue">{t.status.replace(/_/g, ' ')}</Badge>
@@ -117,9 +117,9 @@ export function ProjectDetail() {
                     ) : (
                       <div className="space-y-2">
                         {membersQ.data!.map((m: any) => (
-                          <div key={m.id} className="flex items-center justify-between rounded-lg border border-[#22232b] bg-[#101116] p-3 text-sm">
-                            <span className="text-gray-200">{userLabel(users, m.user_id)}</span>
-                            <button onClick={() => removeMember(m.id)} className="text-gray-500 hover:text-red-400"><X className="h-4 w-4" /></button>
+                          <div key={m.id} className="flex items-center justify-between rounded-lg border border-[#e5e7eb] bg-[#f8fafc] p-3 text-sm">
+                            <span className="text-gray-800">{userLabel(users, m.user_id)}</span>
+                            <button onClick={() => removeMember(m.id)} className="text-gray-500 hover:text-red-600"><X className="h-4 w-4" /></button>
                           </div>
                         ))}
                       </div>
@@ -132,7 +132,7 @@ export function ProjectDetail() {
         </div>
 
         <Card>
-          <CardHeader><h3 className="font-medium text-gray-200">Details</h3></CardHeader>
+          <CardHeader><h3 className="font-medium text-gray-800">Details</h3></CardHeader>
           <CardBody className="space-y-3 text-sm">
             <Row label="Status"><Badge color="green">{project.status.replace(/_/g, ' ')}</Badge></Row>
             <Row label="Priority"><Badge color="orange">{project.priority}</Badge></Row>
@@ -154,9 +154,9 @@ export function ProjectDetail() {
 
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="flex items-center justify-between border-b border-[#1c1d24] pb-2 last:border-0">
+    <div className="flex items-center justify-between border-b border-[#e5e7eb] pb-2 last:border-0">
       <span className="text-gray-500">{label}</span>
-      <span className="text-gray-200">{children}</span>
+      <span className="text-gray-800">{children}</span>
     </div>
   )
 }

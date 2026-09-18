@@ -41,7 +41,7 @@ export function TeamSettings() {
   }
 
   const columns: Column<AppUser>[] = [
-    { key: 'name', header: 'Name', render: (u) => <span className="font-medium text-gray-100">{u.full_name || '—'}</span> },
+    { key: 'name', header: 'Name', render: (u) => <span className="font-medium text-gray-900">{u.full_name || '—'}</span> },
     { key: 'email', header: 'Email', render: (u) => u.email },
     { key: 'title', header: 'Title', render: (u) => u.title ?? '—' },
     {

@@ -34,7 +34,7 @@ export function BackgroundChecksList() {
   const filtered = useMemo(() => (checks ?? []).filter((c) => !status || c.status === status), [checks, status])
 
   const columns: Column<BackgroundCheck>[] = [
-    { key: 'candidate', header: 'Candidate', render: (c) => <span className="font-medium text-gray-100">{candidateName(c.candidate_id)}</span> },
+    { key: 'candidate', header: 'Candidate', render: (c) => <span className="font-medium text-gray-900">{candidateName(c.candidate_id)}</span> },
     { key: 'type', header: 'Type', render: (c) => <Badge color="purple">{c.verification_type.replace(/_/g, ' ')}</Badge> },
     { key: 'provider', header: 'Provider', render: (c) => c.verification_provider ?? '—' },
     { key: 'status', header: 'Status', render: (c) => <Badge color={statusColor[c.status]}>{c.status.replace(/_/g, ' ')}</Badge> },

@@ -23,7 +23,7 @@ export function EmailSettings() {
   const [toDelete, setToDelete] = useState<EmailTemplate | null>(null)
 
   const columns: Column<EmailTemplate>[] = [
-    { key: 'name', header: 'Template', render: (t) => <span className="font-medium text-gray-100">{t.name}</span> },
+    { key: 'name', header: 'Template', render: (t) => <span className="font-medium text-gray-900">{t.name}</span> },
     { key: 'category', header: 'Category', render: (t) => <Badge color="blue">{t.category.replace(/_/g, ' ')}</Badge> },
     { key: 'subject', header: 'Subject', render: (t) => t.subject },
   ]
@@ -42,7 +42,7 @@ export function EmailSettings() {
       />
 
       {statusQ.data && !statusQ.data.email && (
-        <div className="mb-4 flex items-start gap-2 rounded-lg border border-yellow-600/30 bg-yellow-500/10 p-3 text-sm text-yellow-300">
+        <div className="mb-4 flex items-start gap-2 rounded-lg border border-yellow-600/30 bg-yellow-500/10 p-3 text-sm text-yellow-700">
           <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
           <span>No email provider configured. Set RESEND_API_KEY and EMAIL_FROM_ADDRESS on the backend to actually send mail — see Settings → Integrations.</span>
         </div>

@@ -2,7 +2,7 @@ import { forwardRef, type InputHTMLAttributes, type SelectHTMLAttributes, type T
 import clsx from 'clsx'
 
 const fieldClass =
-  'w-full rounded-lg border border-[#2e2f38] bg-[#0f1013] px-3 py-2 text-sm text-gray-100 placeholder:text-gray-500 ' +
+  'w-full rounded-lg border border-[#d1d5db] bg-[#ffffff] px-3 py-2 text-sm text-gray-900 placeholder:text-gray-500 ' +
   'focus:outline-none focus:ring-2 focus:ring-orange-500/40 focus:border-orange-500/60 disabled:opacity-50'
 
 interface FieldWrapProps {
@@ -16,13 +16,13 @@ export const Input = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputE
   ({ label, error, required, hint, className, id, ...rest }, ref) => (
     <label className="block" htmlFor={id}>
       {label && (
-        <span className="mb-1 block text-sm font-medium text-gray-300">
-          {label} {required && <span className="text-orange-400">*</span>}
+        <span className="mb-1 block text-sm font-medium text-gray-700">
+          {label} {required && <span className="text-orange-600">*</span>}
         </span>
       )}
       <input ref={ref} id={id} className={clsx(fieldClass, error && 'border-red-500/70', className)} {...rest} />
       {hint && !error && <span className="mt-1 block text-xs text-gray-500">{hint}</span>}
-      {error && <span className="mt-1 block text-xs text-red-400">{error}</span>}
+      {error && <span className="mt-1 block text-xs text-red-600">{error}</span>}
     </label>
   )
 )
@@ -32,14 +32,14 @@ export const Select = forwardRef<HTMLSelectElement, SelectHTMLAttributes<HTMLSel
   ({ label, error, required, className, id, children, ...rest }, ref) => (
     <label className="block" htmlFor={id}>
       {label && (
-        <span className="mb-1 block text-sm font-medium text-gray-300">
-          {label} {required && <span className="text-orange-400">*</span>}
+        <span className="mb-1 block text-sm font-medium text-gray-700">
+          {label} {required && <span className="text-orange-600">*</span>}
         </span>
       )}
       <select ref={ref} id={id} className={clsx(fieldClass, error && 'border-red-500/70', className)} {...rest}>
         {children}
       </select>
-      {error && <span className="mt-1 block text-xs text-red-400">{error}</span>}
+      {error && <span className="mt-1 block text-xs text-red-600">{error}</span>}
     </label>
   )
 )
@@ -49,12 +49,12 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaHTMLAttributes<H
   ({ label, error, required, className, id, ...rest }, ref) => (
     <label className="block" htmlFor={id}>
       {label && (
-        <span className="mb-1 block text-sm font-medium text-gray-300">
-          {label} {required && <span className="text-orange-400">*</span>}
+        <span className="mb-1 block text-sm font-medium text-gray-700">
+          {label} {required && <span className="text-orange-600">*</span>}
         </span>
       )}
       <textarea ref={ref} id={id} className={clsx(fieldClass, 'min-h-[90px] resize-y', error && 'border-red-500/70', className)} {...rest} />
-      {error && <span className="mt-1 block text-xs text-red-400">{error}</span>}
+      {error && <span className="mt-1 block text-xs text-red-600">{error}</span>}
     </label>
   )
 )

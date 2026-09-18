@@ -36,7 +36,7 @@ export function QuickCreateMenu() {
         Create
       </button>
       {open && (
-        <div className="absolute right-0 z-40 mt-2 w-56 rounded-lg border border-[#26272f] bg-[#16171d] py-1.5 shadow-xl">
+        <div className="absolute right-0 z-40 mt-2 w-56 rounded-lg border border-[#e5e7eb] bg-[#ffffff] py-1.5 shadow-xl">
           {options.map((opt) => {
             const Icon = opt.icon
             return (
@@ -47,7 +47,7 @@ export function QuickCreateMenu() {
                   navigate(opt.path)
                 }}
                 className={clsx(
-                  'flex w-full items-center gap-2.5 px-3 py-2 text-left text-sm text-gray-300 hover:bg-white/5'
+                  'flex w-full items-center gap-2.5 px-3 py-2 text-left text-sm text-gray-700 hover:bg-black/5'
                 )}
               >
                 <Icon className="h-4 w-4 text-gray-500" />

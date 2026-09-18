@@ -19,7 +19,7 @@ export function AutomationBuilder() {
   const [toDelete, setToDelete] = useState<Automation | null>(null)
 
   const columns: Column<Automation>[] = [
-    { key: 'name', header: 'Automation', render: (a) => <span className="font-medium text-gray-100">{a.name}</span> },
+    { key: 'name', header: 'Automation', render: (a) => <span className="font-medium text-gray-900">{a.name}</span> },
     { key: 'when', header: 'When', render: (a) => <Badge color="blue">{a.trigger_entity} · {(a.trigger_condition as any)?.to_value || 'any change'}</Badge> },
     { key: 'active', header: 'Status', render: (a) => <Badge color={a.is_active ? 'green' : 'gray'}>{a.is_active ? 'Active' : 'Paused'}</Badge> },
   ]

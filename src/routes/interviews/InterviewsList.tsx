@@ -35,7 +35,7 @@ export function InterviewsList() {
   const filtered = useMemo(() => (interviews ?? []).filter((i) => !status || i.status === status), [interviews, status])
 
   const columns: Column<Interview>[] = [
-    { key: 'candidate', header: 'Candidate', render: (i) => <span className="font-medium text-gray-100">{candidateName(i.candidate_id)}</span> },
+    { key: 'candidate', header: 'Candidate', render: (i) => <span className="font-medium text-gray-900">{candidateName(i.candidate_id)}</span> },
     { key: 'job', header: 'Job', render: (i) => jobTitle(i.job_id) },
     { key: 'type', header: 'Type', render: (i) => <Badge color="purple">{i.interview_type}</Badge> },
     { key: 'round', header: 'Round', render: (i) => i.round },
@@ -51,11 +51,11 @@ export function InterviewsList() {
         actions={<Button onClick={() => { setEditing(null); setFormOpen(true) }}><Plus className="h-4 w-4" /> Schedule Interview</Button>}
       />
       <Toolbar>
-        <div className="flex rounded-lg border border-[#2e2f38] p-0.5">
-          <button onClick={() => setView('list')} className={`flex items-center gap-1.5 rounded px-2.5 py-1.5 text-sm ${view === 'list' ? 'bg-orange-500/15 text-orange-400' : 'text-gray-400'}`}>
+        <div className="flex rounded-lg border border-[#d1d5db] p-0.5">
+          <button onClick={() => setView('list')} className={`flex items-center gap-1.5 rounded px-2.5 py-1.5 text-sm ${view === 'list' ? 'bg-orange-500/15 text-orange-600' : 'text-gray-600'}`}>
             <List className="h-4 w-4" /> List
           </button>
-          <button onClick={() => setView('calendar')} className={`flex items-center gap-1.5 rounded px-2.5 py-1.5 text-sm ${view === 'calendar' ? 'bg-orange-500/15 text-orange-400' : 'text-gray-400'}`}>
+          <button onClick={() => setView('calendar')} className={`flex items-center gap-1.5 rounded px-2.5 py-1.5 text-sm ${view === 'calendar' ? 'bg-orange-500/15 text-orange-600' : 'text-gray-600'}`}>
             <CalendarDays className="h-4 w-4" /> Calendar
           </button>
         </div>

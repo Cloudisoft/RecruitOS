@@ -31,7 +31,7 @@ export function InvoicesList() {
   const filtered = (invoices ?? []).filter((i) => !status || i.status === status)
 
   const columns: Column<Invoice>[] = [
-    { key: 'number', header: 'Invoice #', render: (i) => <span className="font-medium text-gray-100">{i.invoice_number}</span> },
+    { key: 'number', header: 'Invoice #', render: (i) => <span className="font-medium text-gray-900">{i.invoice_number}</span> },
     { key: 'company', header: 'Company', render: (i) => companyName(i.company_id) },
     { key: 'amount', header: 'Amount', render: (i) => `$${Number(i.amount).toLocaleString()}` },
     { key: 'status', header: 'Status', render: (i) => <Badge color={statusColor[i.status]}>{i.status}</Badge> },

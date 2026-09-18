@@ -41,7 +41,7 @@ export function JobsList() {
   }, [jobs, search, status, companies])
 
   const columns: Column<Job>[] = [
-    { key: 'title', header: 'Job Title', render: (j) => <span className="font-medium text-gray-100">{j.title}</span>, sortValue: (j) => j.title },
+    { key: 'title', header: 'Job Title', render: (j) => <span className="font-medium text-gray-900">{j.title}</span>, sortValue: (j) => j.title },
     { key: 'company', header: 'Client', render: (j) => companyName(j.company_id) },
     { key: 'location', header: 'Location', render: (j) => j.location ?? '—' },
     { key: 'rate', header: 'Rate', render: (j) => (j.rate_min || j.rate_max) ? `$${j.rate_min ?? '?'}-${j.rate_max ?? '?'}/hr` : '—' },

@@ -85,21 +85,21 @@ export function LeadDetail() {
 
       <div className="grid grid-cols-3 gap-5">
         <Card className="col-span-2">
-          <CardHeader><h3 className="font-medium text-gray-200">Timeline & Notes</h3></CardHeader>
+          <CardHeader><h3 className="font-medium text-gray-800">Timeline & Notes</h3></CardHeader>
           <CardBody>
             <EntityTimeline entityType="lead" entityId={lead.id} />
           </CardBody>
         </Card>
 
         <Card>
-          <CardHeader><h3 className="font-medium text-gray-200">Details</h3></CardHeader>
+          <CardHeader><h3 className="font-medium text-gray-800">Details</h3></CardHeader>
           <CardBody className="space-y-3 text-sm">
             <Row label="Status"><StatusBadge status={lead.status} kind="lead" /></Row>
             <Row label="Priority"><StatusBadge status={lead.priority} kind="priority" /></Row>
             <Row label="Source">{lead.source.replace(/_/g, ' ')}</Row>
             <Row label="Email">{lead.email ?? '—'}</Row>
             <Row label="Phone">{lead.phone ?? '—'}</Row>
-            <Row label="LinkedIn">{lead.linkedin_url ? <a href={lead.linkedin_url} target="_blank" className="text-orange-400 hover:underline">Profile</a> : '—'}</Row>
+            <Row label="LinkedIn">{lead.linkedin_url ? <a href={lead.linkedin_url} target="_blank" className="text-orange-600 hover:underline">Profile</a> : '—'}</Row>
             <Row label="Location">{lead.location ?? '—'}</Row>
             <Row label="Industry">{lead.industry ?? '—'}</Row>
             <Row label="Technology">{lead.technology ?? '—'}</Row>
@@ -116,7 +116,7 @@ export function LeadDetail() {
           <Button onClick={doConvert} loading={converting}>Convert</Button>
         </>}
       >
-        <p className="text-sm text-gray-300">
+        <p className="text-sm text-gray-700">
           This will create a Contact{lead.company ? ', a Company,' : ''} and a Sales Opportunity from this lead's data,
           and mark the lead as Converted.
         </p>
@@ -127,9 +127,9 @@ export function LeadDetail() {
 
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="flex items-center justify-between border-b border-[#1c1d24] pb-2 last:border-0">
+    <div className="flex items-center justify-between border-b border-[#e5e7eb] pb-2 last:border-0">
       <span className="text-gray-500">{label}</span>
-      <span className="text-gray-200">{children}</span>
+      <span className="text-gray-800">{children}</span>
     </div>
   )
 }

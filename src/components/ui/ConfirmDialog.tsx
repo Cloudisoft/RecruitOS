@@ -26,7 +26,7 @@ export function ConfirmDialog({ open, title, message, confirmLabel = 'Confirm', 
         </>
       }
     >
-      <p className="text-sm text-gray-300">{message}</p>
+      <p className="text-sm text-gray-700">{message}</p>
     </Modal>
   )
 }

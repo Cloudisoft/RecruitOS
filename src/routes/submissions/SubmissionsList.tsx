@@ -44,7 +44,7 @@ export function SubmissionsList() {
   }, [submissions, search, status, candidates, jobs])
 
   const columns: Column<Submission>[] = [
-    { key: 'candidate', header: 'Candidate', render: (s) => <span className="font-medium text-gray-100">{candidateName(s.candidate_id)}</span> },
+    { key: 'candidate', header: 'Candidate', render: (s) => <span className="font-medium text-gray-900">{candidateName(s.candidate_id)}</span> },
     { key: 'job', header: 'Job', render: (s) => jobTitle(s.job_id) },
     { key: 'bill', header: 'Bill Rate', render: (s) => s.bill_rate ? `$${s.bill_rate}/hr` : '—' },
     { key: 'pay', header: 'Pay Rate', render: (s) => s.pay_rate ? `$${s.pay_rate}/hr` : '—' },

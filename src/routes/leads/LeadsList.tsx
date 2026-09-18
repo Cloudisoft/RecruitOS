@@ -39,7 +39,7 @@ export function LeadsList() {
   }, [leads, search, status])
 
   const columns: Column<Lead>[] = [
-    { key: 'name', header: 'Name', render: (l) => <span className="font-medium text-gray-100">{l.first_name} {l.last_name}</span>, sortValue: (l) => `${l.first_name} ${l.last_name}` },
+    { key: 'name', header: 'Name', render: (l) => <span className="font-medium text-gray-900">{l.first_name} {l.last_name}</span>, sortValue: (l) => `${l.first_name} ${l.last_name}` },
     { key: 'company', header: 'Company', render: (l) => l.company ?? '—' },
     { key: 'email', header: 'Email', render: (l) => l.email ?? '—' },
     { key: 'source', header: 'Source', render: (l) => l.source.replace(/_/g, ' ') },

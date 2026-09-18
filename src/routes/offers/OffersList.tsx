@@ -37,7 +37,7 @@ export function OffersList() {
   const filtered = useMemo(() => (offers ?? []).filter((o) => !status || o.status === status), [offers, status])
 
   const columns: Column<Offer>[] = [
-    { key: 'candidate', header: 'Candidate', render: (o) => <span className="font-medium text-gray-100">{candidateName(o.candidate_id)}</span> },
+    { key: 'candidate', header: 'Candidate', render: (o) => <span className="font-medium text-gray-900">{candidateName(o.candidate_id)}</span> },
     { key: 'job', header: 'Job', render: (o) => jobTitle(o.job_id) },
     { key: 'position', header: 'Position', render: (o) => o.position ?? '—' },
     { key: 'rate', header: 'Rate', render: (o) => o.rate ? `$${o.rate}/hr` : '—' },

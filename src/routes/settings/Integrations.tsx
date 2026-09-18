@@ -54,9 +54,9 @@ export function Integrations() {
           <Card key={r.name}>
             <CardBody className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="rounded-lg bg-white/5 p-2 text-gray-400"><r.icon className="h-5 w-5" /></div>
+                <div className="rounded-lg bg-black/5 p-2 text-gray-600"><r.icon className="h-5 w-5" /></div>
                 <div>
-                  <p className="text-sm font-medium text-gray-100">{r.name}</p>
+                  <p className="text-sm font-medium text-gray-900">{r.name}</p>
                   <p className="text-xs text-gray-500">{r.description}</p>
                 </div>
               </div>

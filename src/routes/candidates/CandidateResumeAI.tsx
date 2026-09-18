@@ -139,8 +139,8 @@ export function CandidateResumeAI({ candidateId }: { candidateId: string }) {
 
   return (
     <div className="space-y-6">
-      <section className="rounded-lg border border-[#22232b] bg-[#101116] p-4">
-        <h4 className="mb-3 flex items-center gap-2 text-sm font-semibold text-gray-200"><FileText className="h-4 w-4" /> 1. Parse a resume document</h4>
+      <section className="rounded-lg border border-[#e5e7eb] bg-[#f8fafc] p-4">
+        <h4 className="mb-3 flex items-center gap-2 text-sm font-semibold text-gray-800"><FileText className="h-4 w-4" /> 1. Parse a resume document</h4>
         {(docsQ.data ?? []).length === 0 ? (
           <p className="text-sm text-gray-500">Upload an original or updated resume in the Documents tab first.</p>
         ) : (
@@ -155,8 +155,8 @@ export function CandidateResumeAI({ candidateId }: { candidateId: string }) {
       </section>
 
       {(resumesQ.data ?? []).length > 0 && (
-        <section className="rounded-lg border border-[#22232b] bg-[#101116] p-4">
-          <h4 className="mb-3 text-sm font-semibold text-gray-200">2. Review parsed data & analyze</h4>
+        <section className="rounded-lg border border-[#e5e7eb] bg-[#f8fafc] p-4">
+          <h4 className="mb-3 text-sm font-semibold text-gray-800">2. Review parsed data & analyze</h4>
           <Select value={selectedResume?.id ?? ''} onChange={(e) => setSelectedResumeId(e.target.value)} className="mb-3 max-w-xs">
             {resumesQ.data!.map((r: any) => <option key={r.id} value={r.id}>Parsed {new Date(r.created_at).toLocaleString()}</option>)}
           </Select>
@@ -180,7 +180,7 @@ export function CandidateResumeAI({ candidateId }: { candidateId: string }) {
               <AnalysisList label="Formatting issues" items={selectedResume.analysis.formatting_issues} />
               <AnalysisList label="Experience gaps" items={selectedResume.analysis.experience_gaps} />
               {typeof selectedResume.analysis.overall_score === 'number' && (
-                <p className="col-span-2 text-gray-300">Overall score: <span className="font-semibold text-orange-400">{selectedResume.analysis.overall_score}/100</span></p>
+                <p className="col-span-2 text-gray-700">Overall score: <span className="font-semibold text-orange-600">{selectedResume.analysis.overall_score}/100</span></p>
               )}
             </div>
           )}
@@ -188,8 +188,8 @@ export function CandidateResumeAI({ candidateId }: { candidateId: string }) {
       )}
 
       {selectedResume && (
-        <section className="rounded-lg border border-[#22232b] bg-[#101116] p-4">
-          <h4 className="mb-3 flex items-center gap-2 text-sm font-semibold text-gray-200"><Wand2 className="h-4 w-4" /> 3. Enhance or Generate (requires your approval before saving)</h4>
+        <section className="rounded-lg border border-[#e5e7eb] bg-[#f8fafc] p-4">
+          <h4 className="mb-3 flex items-center gap-2 text-sm font-semibold text-gray-800"><Wand2 className="h-4 w-4" /> 3. Enhance or Generate (requires your approval before saving)</h4>
           <div className="grid grid-cols-2 gap-4">
             <div>
               <Textarea label="Enhancement instructions" placeholder="e.g. Tighten the summary, emphasize AWS experience" value={enhanceInstructions} onChange={(e) => setEnhanceInstructions(e.target.value)} />
@@ -204,7 +204,7 @@ export function CandidateResumeAI({ candidateId }: { candidateId: string }) {
 
           {draft && (
             <div className="mt-4 rounded-lg border border-orange-600/30 bg-orange-500/5 p-3">
-              <p className="mb-2 text-sm text-orange-300">Review the AI draft below. Edit anything before approving — nothing is saved until you approve.</p>
+              <p className="mb-2 text-sm text-orange-700">Review the AI draft below. Edit anything before approving — nothing is saved until you approve.</p>
               <Textarea value={draft.json} onChange={(e) => setDraft({ ...draft, json: e.target.value })} className="min-h-[240px] font-mono text-xs" />
               <div className="mt-2 flex justify-end gap-2">
                 <Button size="sm" variant="secondary" onClick={() => setDraft(null)}>Discard</Button>
@@ -216,15 +216,15 @@ export function CandidateResumeAI({ candidateId }: { candidateId: string }) {
       )}
 
       <section>
-        <h4 className="mb-3 text-sm font-semibold text-gray-200">Resume Versions</h4>
+        <h4 className="mb-3 text-sm font-semibold text-gray-800">Resume Versions</h4>
         {(versionsQ.data ?? []).length === 0 ? (
           <EmptyState title="No approved resume versions yet" description="Enhanced or generated drafts appear here once you approve them." />
         ) : (
           <div className="space-y-2">
             {versionsQ.data!.map((v: any) => (
-              <div key={v.id} className="flex items-center justify-between rounded-lg border border-[#22232b] bg-[#101116] p-3">
+              <div key={v.id} className="flex items-center justify-between rounded-lg border border-[#e5e7eb] bg-[#f8fafc] p-3">
                 <div>
-                  <p className="text-sm text-gray-200">{v.name} <span className="text-gray-500">v{v.version_number}</span></p>
+                  <p className="text-sm text-gray-800">{v.name} <span className="text-gray-500">v{v.version_number}</span></p>
                   <div className="mt-1 flex gap-1.5">
                     <Badge color="purple">{v.kind}</Badge>
                     <Badge color="green">{v.status}</Badge>
@@ -249,7 +249,7 @@ function AnalysisList({ label, items }: { label: string; items?: string[] }) {
   return (
     <div>
       <p className="mb-1 text-gray-500">{label}</p>
-      <ul className="list-inside list-disc space-y-0.5 text-gray-300">
+      <ul className="list-inside list-disc space-y-0.5 text-gray-700">
         {items.map((i, idx) => <li key={idx}>{i}</li>)}
       </ul>
     </div>

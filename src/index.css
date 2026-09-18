@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #0b0c0f;
-  --color-surface: #14151a;
-  --color-surface-2: #1b1c22;
-  --color-border: #26272f;
+  --color-bg: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-2: #f1f5f9;
+  --color-border: #e5e7eb;
   --color-accent: #f97316;
-  --color-accent-hover: #fb923c;
-  --color-text: #e5e7eb;
-  --color-text-muted: #9ca3af;
-  --color-text-dim: #6b7280;
+  --color-accent-hover: #ea580c;
+  --color-text: #111827;
+  --color-text-muted: #6b7280;
+  --color-text-dim: #9ca3af;
 }
 
 html, body, #root {
@@ -36,11 +36,11 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2e2f38;
+  background: #d1d5db;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3a3b46;
+  background: #9ca3af;
 }
 
 input, select, textarea {

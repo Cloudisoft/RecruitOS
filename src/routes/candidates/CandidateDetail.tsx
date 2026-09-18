@@ -91,8 +91,8 @@ export function CandidateDetail() {
                   : (
                     <div className="space-y-2">
                       {submissionsQ.data!.map((s: any) => (
-                        <div key={s.id} className="flex items-center justify-between rounded-lg border border-[#22232b] bg-[#101116] p-3 text-sm">
-                          <span className="text-gray-200">Bill ${s.bill_rate ?? '—'} / Pay ${s.pay_rate ?? '—'}</span>
+                        <div key={s.id} className="flex items-center justify-between rounded-lg border border-[#e5e7eb] bg-[#f8fafc] p-3 text-sm">
+                          <span className="text-gray-800">Bill ${s.bill_rate ?? '—'} / Pay ${s.pay_rate ?? '—'}</span>
                           <StatusBadge status={s.status} kind="submission" />
                         </div>
                       ))}
@@ -105,7 +105,7 @@ export function CandidateDetail() {
         </div>
 
         <Card>
-          <CardHeader><h3 className="font-medium text-gray-200">Bench Info</h3></CardHeader>
+          <CardHeader><h3 className="font-medium text-gray-800">Bench Info</h3></CardHeader>
           <CardBody className="space-y-3 text-sm">
             <Row label="Bench status"><Badge color="orange">{candidate.bench_status.replace(/_/g, ' ')}</Badge></Row>
             <Row label="Bench start">{candidate.bench_start_date}</Row>
@@ -124,9 +124,9 @@ export function CandidateDetail() {
 
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="flex items-center justify-between border-b border-[#1c1d24] pb-2 last:border-0">
+    <div className="flex items-center justify-between border-b border-[#e5e7eb] pb-2 last:border-0">
       <span className="text-gray-500">{label}</span>
-      <span className="text-gray-200">{children}</span>
+      <span className="text-gray-800">{children}</span>
     </div>
   )
 }

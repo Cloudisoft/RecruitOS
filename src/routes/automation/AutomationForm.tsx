@@ -112,7 +112,7 @@ export function AutomationForm({ open, onClose, automationId }: { open: boolean;
         <Input label="Automation name" required value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. Ready to Market -> notify marketing team" />
         <Textarea label="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
 
-        <div className="rounded-lg border border-[#22232b] bg-[#101116] p-3">
+        <div className="rounded-lg border border-[#e5e7eb] bg-[#f8fafc] p-3">
           <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-500">When</p>
           <div className="grid grid-cols-2 gap-3">
             <Select label="Entity" value={triggerEntity} onChange={(e) => setTriggerEntity(e.target.value)}>
@@ -120,7 +120,7 @@ export function AutomationForm({ open, onClose, automationId }: { open: boolean;
             </Select>
             <Input label="Status changes to (leave blank for any change)" value={toValue} onChange={(e) => setToValue(e.target.value)} placeholder="e.g. ready_to_market" />
           </div>
-          <label className="mt-3 flex items-center gap-2 text-sm text-gray-300">
+          <label className="mt-3 flex items-center gap-2 text-sm text-gray-700">
             <input type="checkbox" checked={isActive} onChange={(e) => setIsActive(e.target.checked)} /> Active
           </label>
         </div>
@@ -132,12 +132,12 @@ export function AutomationForm({ open, onClose, automationId }: { open: boolean;
           </div>
           <div className="space-y-3">
             {actions.map((action) => (
-              <div key={action.id} className="rounded-lg border border-[#22232b] bg-[#101116] p-3">
+              <div key={action.id} className="rounded-lg border border-[#e5e7eb] bg-[#f8fafc] p-3">
                 <div className="mb-2 flex items-center justify-between">
                   <Select value={action.action_type} onChange={(e) => updateAction(action.id, { action_type: e.target.value, params: {} })} className="max-w-xs">
                     {actionTypes.map((t) => <option key={t} value={t}>{t.replace(/_/g, ' ')}</option>)}
                   </Select>
-                  <button onClick={() => removeAction(action.id)} className="text-gray-500 hover:text-red-400"><Trash2 className="h-4 w-4" /></button>
+                  <button onClick={() => removeAction(action.id)} className="text-gray-500 hover:text-red-600"><Trash2 className="h-4 w-4" /></button>
                 </div>
                 {action.action_type === 'create_task' && (
                   <div className="grid grid-cols-3 gap-2">

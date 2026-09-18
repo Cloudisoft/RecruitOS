@@ -59,7 +59,7 @@ export function NotificationsBell() {
     <div className="relative" ref={ref}>
       <button
         onClick={() => setOpen((v) => !v)}
-        className="relative flex h-9 w-9 items-center justify-center rounded-lg text-gray-400 hover:bg-white/5 hover:text-gray-200"
+        className="relative flex h-9 w-9 items-center justify-center rounded-lg text-gray-600 hover:bg-black/5 hover:text-gray-800"
       >
         <Bell className="h-5 w-5" />
         {unread > 0 && (
@@ -69,18 +69,18 @@ export function NotificationsBell() {
         )}
       </button>
       {open && (
-        <div className="absolute right-0 z-40 mt-2 w-80 rounded-lg border border-[#26272f] bg-[#16171d] shadow-xl">
-          <div className="flex items-center justify-between border-b border-[#22232b] px-3 py-2">
-            <span className="text-sm font-medium text-gray-200">Notifications</span>
+        <div className="absolute right-0 z-40 mt-2 w-80 rounded-lg border border-[#e5e7eb] bg-[#ffffff] shadow-xl">
+          <div className="flex items-center justify-between border-b border-[#e5e7eb] px-3 py-2">
+            <span className="text-sm font-medium text-gray-800">Notifications</span>
             {unread > 0 && (
-              <button onClick={markAllRead} className="text-xs text-orange-400 hover:underline">Mark all read</button>
+              <button onClick={markAllRead} className="text-xs text-orange-600 hover:underline">Mark all read</button>
             )}
           </div>
           <div className="max-h-96 overflow-y-auto">
             {items.length === 0 && <p className="px-3 py-6 text-center text-sm text-gray-500">No notifications yet</p>}
             {items.map((n) => (
-              <div key={n.id} className={`border-b border-[#1c1d24] px-3 py-2.5 ${!n.is_read ? 'bg-orange-500/5' : ''}`}>
-                <p className="text-sm text-gray-200">{n.title}</p>
+              <div key={n.id} className={`border-b border-[#e5e7eb] px-3 py-2.5 ${!n.is_read ? 'bg-orange-500/5' : ''}`}>
+                <p className="text-sm text-gray-800">{n.title}</p>
                 {n.body && <p className="text-xs text-gray-500">{n.body}</p>}
                 <p className="mt-0.5 text-[11px] text-gray-600">{formatDistanceToNow(new Date(n.created_at), { addSuffix: true })}</p>
               </div>

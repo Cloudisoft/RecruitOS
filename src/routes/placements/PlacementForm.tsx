@@ -90,13 +90,13 @@ export function PlacementForm({ open, onClose, placement, defaultCandidateId }: 
           {users?.map((u) => <option key={u.id} value={u.id}>{u.full_name || u.email}</option>)}
         </Select>
         <Input label="Guarantee period (days)" type="number" value={form.guarantee_period_days ?? ''} onChange={(e) => set('guarantee_period_days', Number(e.target.value))} />
-        <div className="flex items-end pb-2 text-sm text-gray-400">Margin: <span className="ml-1 font-semibold text-green-400">${margin.toFixed(2)}/hr</span></div>
+        <div className="flex items-end pb-2 text-sm text-gray-600">Margin: <span className="ml-1 font-semibold text-green-600">${margin.toFixed(2)}/hr</span></div>
         <div className="col-span-2">
           <Textarea label="Notes" value={form.notes ?? ''} onChange={(e) => set('notes', e.target.value)} />
         </div>
       </div>
       {!placement && (
-        <p className="mt-4 rounded-lg border border-green-600/30 bg-green-500/10 p-3 text-sm text-green-300">
+        <p className="mt-4 rounded-lg border border-green-600/30 bg-green-500/10 p-3 text-sm text-green-700">
           Creating this placement automatically sets the candidate's status to "Placed".
         </p>
       )}

@@ -39,7 +39,7 @@ export function CandidatesList() {
   }, [candidates, search, status])
 
   const columns: Column<Candidate>[] = [
-    { key: 'name', header: 'Candidate', render: (c) => <span className="font-medium text-gray-100">{c.first_name} {c.last_name}</span>, sortValue: (c) => `${c.first_name} ${c.last_name}` },
+    { key: 'name', header: 'Candidate', render: (c) => <span className="font-medium text-gray-900">{c.first_name} {c.last_name}</span>, sortValue: (c) => `${c.first_name} ${c.last_name}` },
     { key: 'skill', header: 'Primary Skill', render: (c) => c.primary_skill ?? '—' },
     { key: 'title', header: 'Target Title', render: (c) => c.target_title ?? c.current_title ?? '—' },
     { key: 'auth', header: 'Work Auth', render: (c) => c.work_authorization?.replace(/_/g, ' ').toUpperCase() ?? '—' },

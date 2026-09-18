@@ -62,7 +62,7 @@ export function JobDetail() {
                     <CardBody className="space-y-4 text-sm">
                       <div>
                         <p className="mb-1 text-gray-500">Description</p>
-                        <p className="whitespace-pre-wrap text-gray-300">{job.description || 'No description provided.'}</p>
+                        <p className="whitespace-pre-wrap text-gray-700">{job.description || 'No description provided.'}</p>
                       </div>
                       <div>
                         <p className="mb-1 text-gray-500">Required skills</p>
@@ -83,9 +83,9 @@ export function JobDetail() {
                   : (
                     <div className="space-y-2">
                       {suggestions.map(({ candidate: c, score, matched, missing }) => (
-                        <div key={c.id} className="rounded-lg border border-[#22232b] bg-[#101116] p-3">
+                        <div key={c.id} className="rounded-lg border border-[#e5e7eb] bg-[#f8fafc] p-3">
                           <div className="flex items-center justify-between">
-                            <button onClick={() => navigate(`/candidates/${c.id}`)} className="text-sm font-medium text-gray-100 hover:text-orange-400">
+                            <button onClick={() => navigate(`/candidates/${c.id}`)} className="text-sm font-medium text-gray-900 hover:text-orange-600">
                               {c.first_name} {c.last_name}
                             </button>
                             <div className="flex items-center gap-2">
@@ -109,8 +109,8 @@ export function JobDetail() {
                   : (
                     <div className="space-y-2">
                       {submissionsQ.data!.map((s: any) => (
-                        <div key={s.id} className="flex items-center justify-between rounded-lg border border-[#22232b] bg-[#101116] p-3 text-sm">
-                          <span className="text-gray-200">Bill ${s.bill_rate ?? '—'} / Pay ${s.pay_rate ?? '—'}</span>
+                        <div key={s.id} className="flex items-center justify-between rounded-lg border border-[#e5e7eb] bg-[#f8fafc] p-3 text-sm">
+                          <span className="text-gray-800">Bill ${s.bill_rate ?? '—'} / Pay ${s.pay_rate ?? '—'}</span>
                           <StatusBadge status={s.status} kind="submission" />
                         </div>
                       ))}
@@ -123,7 +123,7 @@ export function JobDetail() {
         </div>
 
         <Card>
-          <CardHeader><h3 className="font-medium text-gray-200">Details</h3></CardHeader>
+          <CardHeader><h3 className="font-medium text-gray-800">Details</h3></CardHeader>
           <CardBody className="space-y-3 text-sm">
             <Row label="Status"><StatusBadge status={job.status} kind="job" /></Row>
             <Row label="Location">{job.location ?? '—'}</Row>
@@ -152,9 +152,9 @@ export function JobDetail() {
 
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="flex items-center justify-between border-b border-[#1c1d24] pb-2 last:border-0">
+    <div className="flex items-center justify-between border-b border-[#e5e7eb] pb-2 last:border-0">
       <span className="text-gray-500">{label}</span>
-      <span className="text-gray-200">{children}</span>
+      <span className="text-gray-800">{children}</span>
     </div>
   )
 }

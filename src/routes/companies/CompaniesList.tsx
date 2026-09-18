@@ -36,7 +36,7 @@ export function CompaniesList() {
   }, [companies, search, type])
 
   const columns: Column<Company>[] = [
-    { key: 'name', header: 'Company', render: (c) => <span className="font-medium text-gray-100">{c.name}</span>, sortValue: (c) => c.name },
+    { key: 'name', header: 'Company', render: (c) => <span className="font-medium text-gray-900">{c.name}</span>, sortValue: (c) => c.name },
     { key: 'industry', header: 'Industry', render: (c) => c.industry ?? '—' },
     { key: 'location', header: 'Location', render: (c) => c.location ?? '—' },
     { key: 'type', header: 'Type', render: (c) => <Badge color="purple">{c.company_type.replace(/_/g, ' ')}</Badge> },

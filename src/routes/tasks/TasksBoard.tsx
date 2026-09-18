@@ -58,11 +58,11 @@ export function TasksBoard() {
             key={col.key}
             onDragOver={(e) => e.preventDefault()}
             onDrop={() => moveTo(col.key)}
-            className="flex w-64 shrink-0 flex-col rounded-xl border border-[#22232b] bg-[#101116]"
+            className="flex w-64 shrink-0 flex-col rounded-xl border border-[#e5e7eb] bg-[#f8fafc]"
           >
-            <div className="flex items-center justify-between border-b border-[#1c1d24] px-3 py-2.5">
-              <span className="text-xs font-semibold uppercase tracking-wide text-gray-400">{col.label}</span>
-              <span className="rounded-full bg-white/5 px-2 py-0.5 text-xs text-gray-500">{grouped.get(col.key)?.length ?? 0}</span>
+            <div className="flex items-center justify-between border-b border-[#e5e7eb] px-3 py-2.5">
+              <span className="text-xs font-semibold uppercase tracking-wide text-gray-600">{col.label}</span>
+              <span className="rounded-full bg-black/5 px-2 py-0.5 text-xs text-gray-500">{grouped.get(col.key)?.length ?? 0}</span>
             </div>
             <div className="flex-1 space-y-2 overflow-y-auto p-2">
               {grouped.get(col.key)?.map((t) => {
@@ -73,12 +73,12 @@ export function TasksBoard() {
                     draggable
                     onDragStart={() => setDragId(t.id)}
                     onClick={() => { setEditing(t); setFormOpen(true) }}
-                    className="cursor-grab rounded-lg border border-[#22232b] bg-[#16171d] p-3 active:cursor-grabbing hover:border-orange-500/40"
+                    className="cursor-grab rounded-lg border border-[#e5e7eb] bg-[#ffffff] p-3 active:cursor-grabbing hover:border-orange-500/40"
                   >
-                    <p className="text-sm font-medium text-gray-100">{t.title}</p>
+                    <p className="text-sm font-medium text-gray-900">{t.title}</p>
                     <div className="mt-2 flex items-center justify-between">
                       <StatusBadge status={t.priority} kind="priority" />
-                      {t.due_date && <span className={`text-xs ${overdue ? 'text-red-400' : 'text-gray-500'}`}>{t.due_date}</span>}
+                      {t.due_date && <span className={`text-xs ${overdue ? 'text-red-600' : 'text-gray-500'}`}>{t.due_date}</span>}
                     </div>
                     <p className="mt-1 truncate text-[11px] text-gray-600">{userLabel(users, t.assignee_id)}</p>
                   </div>

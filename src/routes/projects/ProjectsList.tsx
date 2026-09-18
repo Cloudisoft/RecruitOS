@@ -25,7 +25,7 @@ export function ProjectsList() {
   const [toDelete, setToDelete] = useState<Project | null>(null)
 
   const columns: Column<Project>[] = [
-    { key: 'name', header: 'Project', render: (p) => <span className="font-medium text-gray-100">{p.name}</span>, sortValue: (p) => p.name },
+    { key: 'name', header: 'Project', render: (p) => <span className="font-medium text-gray-900">{p.name}</span>, sortValue: (p) => p.name },
     { key: 'status', header: 'Status', render: (p) => <Badge color={statusColor[p.status] ?? 'gray'}>{p.status.replace(/_/g, ' ')}</Badge> },
     { key: 'priority', header: 'Priority', render: (p) => <Badge color="orange">{p.priority}</Badge> },
     { key: 'owner', header: 'Owner', render: (p) => userLabel(users, p.owner_id) },

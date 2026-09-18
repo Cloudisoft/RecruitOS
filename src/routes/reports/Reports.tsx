@@ -70,7 +70,7 @@ function ReportCard({ title, onExport, children }: { title: string; onExport?: (
     <Card>
       <CardBody>
         <div className="mb-4 flex items-center justify-between">
-          <h3 className="text-sm font-semibold text-gray-300">{title}</h3>
+          <h3 className="text-sm font-semibold text-gray-700">{title}</h3>
           {onExport && <Button size="sm" variant="secondary" onClick={onExport}><Download className="h-3.5 w-3.5" /> Export CSV</Button>}
         </div>
         {children}
@@ -91,13 +91,13 @@ function LeadConversionReport({ leads }: { leads: any[] }) {
   return (
     <ReportCard title="Lead Conversion" onExport={() => exportToCsv('lead-conversion.csv', filtered.map((l) => ({ name: `${l.first_name} ${l.last_name}`, company: l.company, status: l.status, source: l.source, created_at: l.created_at })))}>
       <div className="mb-4"><DateRangeFilter value={range} onChange={setRange} /></div>
-      <p className="mb-4 text-sm text-gray-400">Conversion rate: <span className="font-semibold text-green-400">{conversionRate}%</span> ({filtered.length} leads in range)</p>
+      <p className="mb-4 text-sm text-gray-600">Conversion rate: <span className="font-semibold text-green-600">{conversionRate}%</span> ({filtered.length} leads in range)</p>
       <ResponsiveContainer width="100%" height={260}>
         <BarChart data={byStatus}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#22232b" />
+          <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
           <XAxis dataKey="name" stroke="#6b7280" fontSize={11} interval={0} angle={-20} textAnchor="end" height={60} />
           <YAxis stroke="#6b7280" fontSize={11} allowDecimals={false} />
-          <Tooltip contentStyle={{ background: '#16171d', border: '1px solid #26272f', fontSize: 12 }} />
+          <Tooltip contentStyle={{ background: '#ffffff', border: '1px solid #e5e7eb', fontSize: 12 }} />
           <Bar dataKey="value" fill="#f97316" radius={[4, 4, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
@@ -118,13 +118,13 @@ function BenchAgingReport({ candidates, recruiterFilter }: { candidates: any[]; 
 
   return (
     <ReportCard title="Bench Aging" onExport={() => exportToCsv('bench-aging.csv', filtered.map((c) => ({ name: `${c.first_name} ${c.last_name}`, bench_start_date: c.bench_start_date, days_on_bench: benchAgeDays(c.bench_start_date), status: c.status })))}>
-      <p className="mb-4 text-sm text-gray-400">{filtered.length} candidates on bench</p>
+      <p className="mb-4 text-sm text-gray-600">{filtered.length} candidates on bench</p>
       <ResponsiveContainer width="100%" height={260}>
         <BarChart data={buckets}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#22232b" />
+          <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
           <XAxis dataKey="name" stroke="#6b7280" fontSize={11} />
           <YAxis stroke="#6b7280" fontSize={11} allowDecimals={false} />
-          <Tooltip contentStyle={{ background: '#16171d', border: '1px solid #26272f', fontSize: 12 }} />
+          <Tooltip contentStyle={{ background: '#ffffff', border: '1px solid #e5e7eb', fontSize: 12 }} />
           <Bar dataKey="value" fill="#eab308" radius={[4, 4, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
@@ -143,13 +143,13 @@ function SubmissionsReport({ submissions, recruiterFilter }: { submissions: any[
   return (
     <ReportCard title="Submission Report" onExport={() => exportToCsv('submissions.csv', filtered.map((s) => ({ id: s.id, status: s.status, bill_rate: s.bill_rate, pay_rate: s.pay_rate, submission_date: s.submission_date })))}>
       <div className="mb-4"><DateRangeFilter value={range} onChange={setRange} /></div>
-      <p className="mb-4 text-sm text-gray-400">{filtered.length} submissions in range</p>
+      <p className="mb-4 text-sm text-gray-600">{filtered.length} submissions in range</p>
       <ResponsiveContainer width="100%" height={260}>
         <BarChart data={byStatus}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#22232b" />
+          <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
           <XAxis dataKey="name" stroke="#6b7280" fontSize={11} interval={0} angle={-20} textAnchor="end" height={60} />
           <YAxis stroke="#6b7280" fontSize={11} allowDecimals={false} />
-          <Tooltip contentStyle={{ background: '#16171d', border: '1px solid #26272f', fontSize: 12 }} />
+          <Tooltip contentStyle={{ background: '#ffffff', border: '1px solid #e5e7eb', fontSize: 12 }} />
           <Bar dataKey="value" fill="#3b82f6" radius={[4, 4, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
@@ -166,7 +166,7 @@ function InterviewsReport({ interviews }: { interviews: any[] }) {
   return (
     <ReportCard title="Interview Conversion" onExport={() => exportToCsv('interviews.csv', filtered.map((i) => ({ id: i.id, type: i.interview_type, status: i.status, scheduled_at: i.scheduled_at, round: i.round })))}>
       <div className="mb-4"><DateRangeFilter value={range} onChange={setRange} /></div>
-      <p className="text-sm text-gray-400">{filtered.length} interviews scheduled, {completed} completed ({conversionRate}%)</p>
+      <p className="text-sm text-gray-600">{filtered.length} interviews scheduled, {completed} completed ({conversionRate}%)</p>
     </ReportCard>
   )
 }
@@ -179,7 +179,7 @@ function PlacementsReport({ placements, recruiterFilter }: { placements: any[]; 
   return (
     <ReportCard title="Placement & Margin Report" onExport={() => exportToCsv('placements.csv', filtered.map((p) => ({ id: p.id, position: p.position, pay_rate: p.pay_rate, bill_rate: p.bill_rate, margin: p.margin, status: p.status, placement_date: p.placement_date })))}>
       <div className="mb-4"><DateRangeFilter value={range} onChange={setRange} /></div>
-      <p className="text-sm text-gray-400">{filtered.length} placements, total margin <span className="font-semibold text-green-400">${totalMargin.toFixed(2)}/hr (sum)</span></p>
+      <p className="text-sm text-gray-600">{filtered.length} placements, total margin <span className="font-semibold text-green-600">${totalMargin.toFixed(2)}/hr (sum)</span></p>
     </ReportCard>
   )
 }
@@ -201,13 +201,13 @@ function RecruiterPerformanceReport({ candidates, submissions, placements, users
           <thead className="text-xs uppercase text-gray-500">
             <tr><th className="py-2">Recruiter</th><th className="py-2">Candidates</th><th className="py-2">Submissions</th><th className="py-2">Placements</th></tr>
           </thead>
-          <tbody className="divide-y divide-[#1c1d24]">
+          <tbody className="divide-y divide-[#e5e7eb]">
             {rows.map((r) => (
               <tr key={r.recruiter}>
-                <td className="py-2 text-gray-200">{r.recruiter}</td>
-                <td className="py-2 text-gray-300">{r.candidates_owned}</td>
-                <td className="py-2 text-gray-300">{r.submissions_made}</td>
-                <td className="py-2 text-gray-300">{r.placements_closed}</td>
+                <td className="py-2 text-gray-800">{r.recruiter}</td>
+                <td className="py-2 text-gray-700">{r.candidates_owned}</td>
+                <td className="py-2 text-gray-700">{r.submissions_made}</td>
+                <td className="py-2 text-gray-700">{r.placements_closed}</td>
               </tr>
             ))}
           </tbody>

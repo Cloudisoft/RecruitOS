@@ -61,11 +61,11 @@ export function Pipeline() {
             key={stage.key}
             onDragOver={(e) => e.preventDefault()}
             onDrop={() => moveTo(stage.key)}
-            className="flex w-72 shrink-0 flex-col rounded-xl border border-[#22232b] bg-[#101116]"
+            className="flex w-72 shrink-0 flex-col rounded-xl border border-[#e5e7eb] bg-[#f8fafc]"
           >
-            <div className="flex items-center justify-between border-b border-[#1c1d24] px-3 py-2.5">
-              <span className="text-xs font-semibold uppercase tracking-wide text-gray-400">{stage.label}</span>
-              <span className="rounded-full bg-white/5 px-2 py-0.5 text-xs text-gray-500">{grouped.get(stage.key)?.length ?? 0}</span>
+            <div className="flex items-center justify-between border-b border-[#e5e7eb] px-3 py-2.5">
+              <span className="text-xs font-semibold uppercase tracking-wide text-gray-600">{stage.label}</span>
+              <span className="rounded-full bg-black/5 px-2 py-0.5 text-xs text-gray-500">{grouped.get(stage.key)?.length ?? 0}</span>
             </div>
             <div className="flex-1 space-y-2 overflow-y-auto p-2">
               {grouped.get(stage.key)?.map((opp) => (
@@ -74,9 +74,9 @@ export function Pipeline() {
                   draggable
                   onDragStart={() => setDragId(opp.id)}
                   onClick={() => navigate(`/pipeline/${opp.id}`)}
-                  className="cursor-grab rounded-lg border border-[#22232b] bg-[#16171d] p-3 active:cursor-grabbing hover:border-orange-500/40"
+                  className="cursor-grab rounded-lg border border-[#e5e7eb] bg-[#ffffff] p-3 active:cursor-grabbing hover:border-orange-500/40"
                 >
-                  <p className="text-sm font-medium text-gray-100">{opp.name}</p>
+                  <p className="text-sm font-medium text-gray-900">{opp.name}</p>
                   <p className="mt-1 text-xs text-gray-500">{companies?.find((c) => c.id === opp.company_id)?.name ?? '—'}</p>
                   <div className="mt-2 flex items-center justify-between text-xs text-gray-500">
                     <span>${Number(opp.estimated_value ?? 0).toLocaleString()}</span>

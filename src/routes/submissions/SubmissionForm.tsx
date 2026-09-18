@@ -84,7 +84,7 @@ export function SubmissionForm({
       </>
     }>
       {duplicateWarning && (
-        <div className="mb-4 flex items-start gap-2 rounded-lg border border-yellow-600/30 bg-yellow-500/10 p-3 text-sm text-yellow-300">
+        <div className="mb-4 flex items-start gap-2 rounded-lg border border-yellow-600/30 bg-yellow-500/10 p-3 text-sm text-yellow-700">
           <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
           <span>This candidate already has an active submission for this job. Submitting again may create a duplicate.</span>
         </div>

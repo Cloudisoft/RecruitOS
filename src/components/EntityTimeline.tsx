@@ -84,12 +84,12 @@ export function EntityTimeline({ entityType, entityId }: { entityType: string; e
 
       <div className="space-y-3">
         {combined.map((item) => (
-          <div key={item.kind + item.id} className="flex gap-3 rounded-lg border border-[#22232b] bg-[#101116] p-3">
+          <div key={item.kind + item.id} className="flex gap-3 rounded-lg border border-[#e5e7eb] bg-[#f8fafc] p-3">
             <div className="mt-0.5 shrink-0 text-gray-500">
               {item.kind === 'note' ? <StickyNote className="h-4 w-4" /> : <ActivityIcon className="h-4 w-4" />}
             </div>
             <div className="min-w-0 flex-1">
-              <p className="text-sm text-gray-200">{item.kind === 'note' ? item.body : item.summary}</p>
+              <p className="text-sm text-gray-800">{item.kind === 'note' ? item.body : item.summary}</p>
               <p className="mt-1 text-xs text-gray-600">{formatDistanceToNow(new Date(item.created_at), { addSuffix: true })}</p>
             </div>
           </div>

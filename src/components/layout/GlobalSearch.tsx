@@ -63,7 +63,7 @@ export function GlobalSearch() {
 
   return (
     <div className="relative w-full max-w-md" ref={ref}>
-      <div className="flex h-9 items-center gap-2 rounded-lg border border-[#26272f] bg-[#0f1013] px-3">
+      <div className="flex h-9 items-center gap-2 rounded-lg border border-[#e5e7eb] bg-[#ffffff] px-3">
         <Search className="h-4 w-4 text-gray-500" />
         <input
           value={query}
@@ -73,12 +73,12 @@ export function GlobalSearch() {
           }}
           onFocus={() => setOpen(true)}
           placeholder="Search candidates, jobs, companies…"
-          className="w-full bg-transparent text-sm text-gray-200 placeholder:text-gray-500 focus:outline-none"
+          className="w-full bg-transparent text-sm text-gray-800 placeholder:text-gray-500 focus:outline-none"
         />
         {loading && <Loader2 className="h-4 w-4 animate-spin text-gray-500" />}
       </div>
       {open && debounced.length >= 2 && (
-        <div className="absolute left-0 right-0 z-40 mt-2 max-h-96 overflow-y-auto rounded-lg border border-[#26272f] bg-[#16171d] py-1.5 shadow-xl">
+        <div className="absolute left-0 right-0 z-40 mt-2 max-h-96 overflow-y-auto rounded-lg border border-[#e5e7eb] bg-[#ffffff] py-1.5 shadow-xl">
           {results.length === 0 && !loading && (
             <p className="px-3 py-3 text-sm text-gray-500">No results for "{debounced}"</p>
           )}
@@ -90,9 +90,9 @@ export function GlobalSearch() {
                 setQuery('')
                 navigate(r.path)
               }}
-              className="flex w-full items-center justify-between px-3 py-2 text-left text-sm hover:bg-white/5"
+              className="flex w-full items-center justify-between px-3 py-2 text-left text-sm hover:bg-black/5"
             >
-              <span className="truncate text-gray-200">{r.title}</span>
+              <span className="truncate text-gray-800">{r.title}</span>
               <span className="ml-2 shrink-0 text-xs text-gray-500">{r.type} · {r.subtitle}</span>
             </button>
           ))}

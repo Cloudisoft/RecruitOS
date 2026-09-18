@@ -1,13 +1,13 @@
 import clsx from 'clsx'
 
 const palette: Record<string, string> = {
-  gray: 'bg-gray-500/15 text-gray-300 border-gray-500/30',
-  blue: 'bg-blue-500/15 text-blue-300 border-blue-500/30',
-  green: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30',
-  orange: 'bg-orange-500/15 text-orange-300 border-orange-500/30',
-  red: 'bg-red-500/15 text-red-300 border-red-500/30',
-  purple: 'bg-purple-500/15 text-purple-300 border-purple-500/30',
-  yellow: 'bg-yellow-500/15 text-yellow-300 border-yellow-500/30',
+  gray: 'bg-gray-500/15 text-gray-700 border-gray-500/30',
+  blue: 'bg-blue-500/15 text-blue-700 border-blue-500/30',
+  green: 'bg-emerald-500/15 text-emerald-700 border-emerald-500/30',
+  orange: 'bg-orange-500/15 text-orange-700 border-orange-500/30',
+  red: 'bg-red-500/15 text-red-700 border-red-500/30',
+  purple: 'bg-purple-500/15 text-purple-700 border-purple-500/30',
+  yellow: 'bg-yellow-500/15 text-yellow-700 border-yellow-500/30',
 }
 
 export function Badge({ color = 'gray', children }: { color?: keyof typeof palette; children: React.ReactNode }) {

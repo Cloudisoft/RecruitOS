@@ -59,13 +59,13 @@ export function Copilot() {
       <PageHeader title="AI Copilot" description="Ask questions about your candidates, submissions, and tasks — scoped to what you can see" />
 
       {notConfigured && (
-        <div className="mb-4 flex items-start gap-2 rounded-lg border border-yellow-600/30 bg-yellow-500/10 p-3 text-sm text-yellow-300">
+        <div className="mb-4 flex items-start gap-2 rounded-lg border border-yellow-600/30 bg-yellow-500/10 p-3 text-sm text-yellow-700">
           <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
           <span>AI Copilot is not configured on this server. Set OPENAI_API_KEY in the backend environment to enable it.</span>
         </div>
       )}
 
-      <div className="flex flex-1 flex-col rounded-xl border border-[#22232b] bg-[#14151a]">
+      <div className="flex flex-1 flex-col rounded-xl border border-[#e5e7eb] bg-[#ffffff]">
         <div className="flex-1 space-y-4 overflow-y-auto p-5">
           {messages.length === 0 && (
             <div className="flex h-full flex-col items-center justify-center gap-4 text-center">
@@ -73,7 +73,7 @@ export function Copilot() {
               <p className="text-sm text-gray-500">Ask me anything about your candidates, submissions, or tasks.</p>
               <div className="flex flex-wrap justify-center gap-2">
                 {SUGGESTIONS.map((s) => (
-                  <button key={s} onClick={() => send(s)} className="rounded-full border border-[#2e2f38] px-3 py-1.5 text-xs text-gray-400 hover:border-orange-500/50 hover:text-orange-300">
+                  <button key={s} onClick={() => send(s)} className="rounded-full border border-[#d1d5db] px-3 py-1.5 text-xs text-gray-600 hover:border-orange-500/50 hover:text-orange-700">
                     {s}
                   </button>
                 ))}
@@ -82,17 +82,17 @@ export function Copilot() {
           )}
           {messages.map((m, i) => (
             <div key={i} className={clsx('flex gap-3', m.role === 'user' && 'flex-row-reverse')}>
-              <div className={clsx('flex h-7 w-7 shrink-0 items-center justify-center rounded-full', m.role === 'user' ? 'bg-orange-500/20 text-orange-300' : 'bg-blue-500/20 text-blue-300')}>
+              <div className={clsx('flex h-7 w-7 shrink-0 items-center justify-center rounded-full', m.role === 'user' ? 'bg-orange-500/20 text-orange-700' : 'bg-blue-500/20 text-blue-700')}>
                 {m.role === 'user' ? <User className="h-4 w-4" /> : <Bot className="h-4 w-4" />}
               </div>
-              <div className={clsx('max-w-[75%] rounded-xl px-4 py-2.5 text-sm whitespace-pre-wrap', m.role === 'user' ? 'bg-orange-500/10 text-gray-100' : 'bg-[#1b1c22] text-gray-200')}>
+              <div className={clsx('max-w-[75%] rounded-xl px-4 py-2.5 text-sm whitespace-pre-wrap', m.role === 'user' ? 'bg-orange-500/10 text-gray-900' : 'bg-[#f1f5f9] text-gray-800')}>
                 {m.content}
               </div>
             </div>
           ))}
           <div ref={bottomRef} />
         </div>
-        <div className="flex items-end gap-2 border-t border-[#22232b] p-3">
+        <div className="flex items-end gap-2 border-t border-[#e5e7eb] p-3">
           <Textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}

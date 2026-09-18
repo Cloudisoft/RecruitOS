@@ -73,7 +73,7 @@ export function OfferForm({ open, onClose, offer, defaultCandidateId }: { open: 
         </Select>
       </div>
       {form.status === 'accepted' && (
-        <p className="mt-4 rounded-lg border border-green-600/30 bg-green-500/10 p-3 text-sm text-green-300">
+        <p className="mt-4 rounded-lg border border-green-600/30 bg-green-500/10 p-3 text-sm text-green-700">
           Accepting this offer automatically creates a Background Check record and moves the candidate to "Background Check" status.
         </p>
       )}

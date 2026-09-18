@@ -6,10 +6,10 @@ import { NotificationsBell } from './NotificationsBell'
 
 export function AppShell() {
   return (
-    <div className="flex h-screen w-full bg-[#0b0c0f] text-gray-100">
+    <div className="flex h-screen w-full bg-[#f8fafc] text-gray-900">
       <Sidebar />
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="flex h-14 shrink-0 items-center justify-between gap-4 border-b border-[#1c1d24] px-6">
+        <header className="flex h-14 shrink-0 items-center justify-between gap-4 border-b border-[#e5e7eb] px-6">
           <GlobalSearch />
           <div className="flex items-center gap-2">
             <NotificationsBell />

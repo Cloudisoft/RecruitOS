@@ -62,8 +62,8 @@ export function CompanyDetail() {
                   : (
                     <div className="space-y-2">
                       {contactsQ.data!.map((c: any) => (
-                        <Link key={c.id} to={`/contacts/${c.id}`} className="flex items-center justify-between rounded-lg border border-[#22232b] bg-[#101116] p-3 hover:border-orange-500/40">
-                          <span className="text-sm text-gray-200">{c.first_name} {c.last_name} — {c.title ?? 'Contact'}</span>
+                        <Link key={c.id} to={`/contacts/${c.id}`} className="flex items-center justify-between rounded-lg border border-[#e5e7eb] bg-[#f8fafc] p-3 hover:border-orange-500/40">
+                          <span className="text-sm text-gray-800">{c.first_name} {c.last_name} — {c.title ?? 'Contact'}</span>
                           <Badge color="blue">{c.contact_type.replace(/_/g, ' ')}</Badge>
                         </Link>
                       ))}
@@ -77,8 +77,8 @@ export function CompanyDetail() {
                   : (
                     <div className="space-y-2">
                       {jobsQ.data!.map((j: any) => (
-                        <Link key={j.id} to={`/jobs/${j.id}`} className="flex items-center justify-between rounded-lg border border-[#22232b] bg-[#101116] p-3 hover:border-orange-500/40">
-                          <span className="text-sm text-gray-200">{j.title}</span>
+                        <Link key={j.id} to={`/jobs/${j.id}`} className="flex items-center justify-between rounded-lg border border-[#e5e7eb] bg-[#f8fafc] p-3 hover:border-orange-500/40">
+                          <span className="text-sm text-gray-800">{j.title}</span>
                           <StatusBadge status={j.status} kind="job" />
                         </Link>
                       ))}
@@ -92,8 +92,8 @@ export function CompanyDetail() {
                   : (
                     <div className="space-y-2">
                       {submissionsQ.data!.map((s: any) => (
-                        <div key={s.id} className="flex items-center justify-between rounded-lg border border-[#22232b] bg-[#101116] p-3">
-                          <span className="text-sm text-gray-200">Bill ${s.bill_rate ?? '—'} / Pay ${s.pay_rate ?? '—'}</span>
+                        <div key={s.id} className="flex items-center justify-between rounded-lg border border-[#e5e7eb] bg-[#f8fafc] p-3">
+                          <span className="text-sm text-gray-800">Bill ${s.bill_rate ?? '—'} / Pay ${s.pay_rate ?? '—'}</span>
                           <StatusBadge status={s.status} kind="submission" />
                         </div>
                       ))}
@@ -109,15 +109,15 @@ export function CompanyDetail() {
         </div>
 
         <Card>
-          <CardHeader><h3 className="font-medium text-gray-200">Details</h3></CardHeader>
+          <CardHeader><h3 className="font-medium text-gray-800">Details</h3></CardHeader>
           <CardBody className="space-y-3 text-sm">
             <Row label="Status"><Badge color={company.status === 'active' ? 'green' : company.status === 'blacklisted' ? 'red' : 'blue'}>{company.status}</Badge></Row>
             <Row label="Type"><Badge color="purple">{company.company_type.replace(/_/g, ' ')}</Badge></Row>
-            <Row label="Website">{company.website ? <a href={company.website} target="_blank" className="text-orange-400 hover:underline">{company.website}</a> : '—'}</Row>
+            <Row label="Website">{company.website ? <a href={company.website} target="_blank" className="text-orange-600 hover:underline">{company.website}</a> : '—'}</Row>
             <Row label="Location">{company.location ?? '—'}</Row>
             <Row label="Company size">{company.company_size ?? '—'}</Row>
             <Row label="Owner">{userLabel(users, company.account_owner_id)}</Row>
-            {company.description && <p className="pt-2 text-gray-400">{company.description}</p>}
+            {company.description && <p className="pt-2 text-gray-600">{company.description}</p>}
           </CardBody>
         </Card>
       </div>
@@ -127,9 +127,9 @@ export function CompanyDetail() {
 
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="flex items-center justify-between border-b border-[#1c1d24] pb-2 last:border-0">
+    <div className="flex items-center justify-between border-b border-[#e5e7eb] pb-2 last:border-0">
       <span className="text-gray-500">{label}</span>
-      <span className="text-gray-200">{children}</span>
+      <span className="text-gray-800">{children}</span>
     </div>
   )
 }

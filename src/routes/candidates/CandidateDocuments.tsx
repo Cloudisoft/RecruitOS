@@ -135,7 +135,7 @@ export function CandidateDocuments({ candidateId }: { candidateId: string }) {
             if (file) upload(file)
           }}
           className={`flex flex-1 items-center justify-center gap-2 rounded-lg border-2 border-dashed px-4 py-3 text-sm transition-colors ${
-            dragActive ? 'border-orange-500 bg-orange-500/5 text-orange-300' : 'border-[#2e2f38] text-gray-500'
+            dragActive ? 'border-orange-500 bg-orange-500/5 text-orange-700' : 'border-[#d1d5db] text-gray-500'
           }`}
         >
           <Upload className="h-4 w-4" />
@@ -161,11 +161,11 @@ export function CandidateDocuments({ candidateId }: { candidateId: string }) {
 
       <div className="space-y-2">
         {(documents ?? []).map((doc: any) => (
-          <div key={doc.id} className="flex items-center justify-between rounded-lg border border-[#22232b] bg-[#101116] p-3">
+          <div key={doc.id} className="flex items-center justify-between rounded-lg border border-[#e5e7eb] bg-[#f8fafc] p-3">
             <div className="flex min-w-0 items-center gap-3">
               <FileText className="h-5 w-5 shrink-0 text-gray-500" />
               <div className="min-w-0">
-                <p className="truncate text-sm text-gray-200">{doc.file_name}</p>
+                <p className="truncate text-sm text-gray-800">{doc.file_name}</p>
                 <p className="text-xs text-gray-500">
                   {doc.category.replace(/_/g, ' ')} · v{doc.version} · {(doc.file_size / 1024).toFixed(0)} KB ·{' '}
                   {formatDistanceToNow(new Date(doc.created_at), { addSuffix: true })}
@@ -174,7 +174,7 @@ export function CandidateDocuments({ candidateId }: { candidateId: string }) {
             </div>
             <div className="flex shrink-0 gap-1">
               <Button size="sm" variant="ghost" onClick={() => download(doc)}><Download className="h-4 w-4" /></Button>
-              <Button size="sm" variant="ghost" onClick={() => setToDelete(doc)}><Trash2 className="h-4 w-4 text-red-400" /></Button>
+              <Button size="sm" variant="ghost" onClick={() => setToDelete(doc)}><Trash2 className="h-4 w-4 text-red-600" /></Button>
             </div>
           </div>
         ))}

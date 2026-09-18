@@ -105,23 +105,23 @@ export function RevenuePage() {
       />
 
       <div className="mb-6 grid grid-cols-3 gap-4">
-        <Card><CardBody><p className="text-xs text-gray-500">Total Billed Revenue</p><p className="text-xl font-semibold text-gray-100">${totalBill.toLocaleString()}</p></CardBody></Card>
-        <Card><CardBody><p className="text-xs text-gray-500">Total Margin</p><p className="text-xl font-semibold text-green-400">${totalMargin.toLocaleString()}</p></CardBody></Card>
-        <Card><CardBody><p className="text-xs text-gray-500">Active Placements</p><p className="text-xl font-semibold text-gray-100">{placementsQ.data?.length ?? 0}</p></CardBody></Card>
+        <Card><CardBody><p className="text-xs text-gray-500">Total Billed Revenue</p><p className="text-xl font-semibold text-gray-900">${totalBill.toLocaleString()}</p></CardBody></Card>
+        <Card><CardBody><p className="text-xs text-gray-500">Total Margin</p><p className="text-xl font-semibold text-green-600">${totalMargin.toLocaleString()}</p></CardBody></Card>
+        <Card><CardBody><p className="text-xs text-gray-500">Active Placements</p><p className="text-xl font-semibold text-gray-900">{placementsQ.data?.length ?? 0}</p></CardBody></Card>
       </div>
 
       <Card>
         <CardBody>
-          <h3 className="mb-4 text-sm font-semibold text-gray-300">Revenue by Month</h3>
+          <h3 className="mb-4 text-sm font-semibold text-gray-700">Revenue by Month</h3>
           {chartData.length === 0 ? (
             <p className="py-10 text-center text-sm text-gray-500">No revenue records yet. {isAdmin && 'Click "Generate this month\'s revenue" to create records from active placements.'}</p>
           ) : (
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={chartData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#22232b" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
                 <XAxis dataKey="name" stroke="#6b7280" fontSize={11} />
                 <YAxis stroke="#6b7280" fontSize={11} />
-                <Tooltip contentStyle={{ background: '#16171d', border: '1px solid #26272f', fontSize: 12 }} />
+                <Tooltip contentStyle={{ background: '#ffffff', border: '1px solid #e5e7eb', fontSize: 12 }} />
                 <Bar dataKey="bill" fill="#3b82f6" radius={[4, 4, 0, 0]} name="Billed" />
                 <Bar dataKey="margin" fill="#22c55e" radius={[4, 4, 0, 0]} name="Margin" />
               </BarChart>

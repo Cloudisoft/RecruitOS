@@ -34,11 +34,11 @@ export function OpportunityDetail() {
       />
       <div className="grid grid-cols-3 gap-5">
         <Card className="col-span-2">
-          <CardHeader><h3 className="font-medium text-gray-200">Timeline & Notes</h3></CardHeader>
+          <CardHeader><h3 className="font-medium text-gray-800">Timeline & Notes</h3></CardHeader>
           <CardBody><EntityTimeline entityType="opportunity" entityId={opp.id} /></CardBody>
         </Card>
         <Card>
-          <CardHeader><h3 className="font-medium text-gray-200">Details</h3></CardHeader>
+          <CardHeader><h3 className="font-medium text-gray-800">Details</h3></CardHeader>
           <CardBody className="space-y-3 text-sm">
             <Row label="Stage"><Badge color="orange">{opp.stage.replace(/_/g, ' ')}</Badge></Row>
             <Row label="Estimated value">${Number(opp.estimated_value).toLocaleString()}</Row>
@@ -56,9 +56,9 @@ export function OpportunityDetail() {
 
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="flex items-center justify-between border-b border-[#1c1d24] pb-2 last:border-0">
+    <div className="flex items-center justify-between border-b border-[#e5e7eb] pb-2 last:border-0">
       <span className="text-gray-500">{label}</span>
-      <span className="text-gray-200">{children}</span>
+      <span className="text-gray-800">{children}</span>
     </div>
   )
 }

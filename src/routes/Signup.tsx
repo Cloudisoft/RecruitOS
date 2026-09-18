@@ -4,6 +4,7 @@ import { useAuth } from '../contexts/AuthContext'
 import { Input } from '../components/ui/Input'
 import { Button } from '../components/ui/Button'
 import toast from 'react-hot-toast'
+import logo from '../assets/logo.webp'
 
 export function Signup() {
   const { signUp, session } = useAuth()
@@ -30,21 +31,23 @@ export function Signup() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#0b0c0f] px-4">
+    <div className="flex min-h-screen items-center justify-center bg-[#f8fafc] px-4">
       <div className="w-full max-w-sm">
-        <div className="mb-8 flex flex-col items-center gap-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-orange-500 text-lg font-bold text-white">R</div>
-          <h1 className="text-lg font-semibold text-gray-100">Create your organization</h1>
-          <p className="text-sm text-gray-500">You'll be the first Admin</p>
+        <div className="mb-6 flex flex-col items-center gap-3">
+          <img src={logo} alt="RecruitOS" className="h-16 w-auto object-contain" />
+          <div className="text-center">
+            <h1 className="text-lg font-semibold text-gray-900">Create your organization</h1>
+            <p className="text-sm text-gray-500">You'll be the first Admin</p>
+          </div>
         </div>
 
         {done ? (
-          <div className="rounded-xl border border-[#22232b] bg-[#14151a] p-6 text-center text-sm text-gray-300">
+          <div className="rounded-xl border border-[#e5e7eb] bg-[#ffffff] p-6 text-center text-sm text-gray-700">
             Account created. Please confirm your email, then{' '}
-            <Link to="/login" className="text-orange-400 hover:underline">sign in</Link>.
+            <Link to="/login" className="text-orange-600 hover:underline">sign in</Link>.
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-4 rounded-xl border border-[#22232b] bg-[#14151a] p-6">
+          <form onSubmit={handleSubmit} className="space-y-4 rounded-xl border border-[#e5e7eb] bg-[#ffffff] p-6">
             <Input label="Organization name" required value={orgName} onChange={(e) => setOrgName(e.target.value)} placeholder="Acme Staffing" />
             <Input label="Full name" required value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder="Jane Doe" />
             <Input label="Email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@company.com" />
@@ -54,7 +57,7 @@ export function Signup() {
         )}
 
         <p className="mt-4 text-center text-sm text-gray-500">
-          Already have an account? <Link to="/login" className="text-orange-400 hover:underline">Sign in</Link>
+          Already have an account? <Link to="/login" className="text-orange-600 hover:underline">Sign in</Link>
         </p>
       </div>
     </div>

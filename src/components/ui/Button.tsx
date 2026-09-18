@@ -13,8 +13,8 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variants: Record<Variant, string> = {
   primary: 'bg-orange-500 text-white hover:bg-orange-400 disabled:bg-orange-500/40',
-  secondary: 'bg-[#1b1c22] text-gray-200 border border-[#2e2f38] hover:bg-[#22232b]',
-  ghost: 'bg-transparent text-gray-300 hover:bg-white/5',
+  secondary: 'bg-[#f1f5f9] text-gray-800 border border-[#d1d5db] hover:bg-[#e5e7eb]',
+  ghost: 'bg-transparent text-gray-700 hover:bg-black/5',
   danger: 'bg-red-600 text-white hover:bg-red-500 disabled:bg-red-600/40',
 }
 const sizes: Record<Size, string> = {

@@ -64,12 +64,12 @@ export function CandidateMarketing({ candidateId }: { candidateId: string }) {
       ) : (
         <div className="space-y-2">
           {activitiesQ.data!.map((m: any) => (
-            <div key={m.id} className="rounded-lg border border-[#22232b] bg-[#101116] p-3 text-sm">
+            <div key={m.id} className="rounded-lg border border-[#e5e7eb] bg-[#f8fafc] p-3 text-sm">
               <div className="flex items-center justify-between">
                 <Badge color="blue">{m.channel.replace(/_/g, ' ')}</Badge>
                 {m.response && <Badge color="orange">{m.response.replace(/_/g, ' ')}</Badge>}
               </div>
-              {m.notes && <p className="mt-2 text-gray-400">{m.notes}</p>}
+              {m.notes && <p className="mt-2 text-gray-600">{m.notes}</p>}
               <p className="mt-1 text-xs text-gray-600">{new Date(m.activity_date).toLocaleString()}</p>
             </div>
           ))}
@@ -90,7 +90,7 @@ export function CandidateMarketing({ candidateId }: { candidateId: string }) {
             <option value="">No response yet</option>
             {responses.map((r) => <option key={r} value={r}>{r.replace(/_/g, ' ')}</option>)}
           </Select>
-          <label className="flex items-center gap-2 text-sm text-gray-300">
+          <label className="flex items-center gap-2 text-sm text-gray-700">
             <input type="checkbox" checked={form.resume_sent} onChange={(e) => setForm((f) => ({ ...f, resume_sent: e.target.checked }))} />
             Resume sent
           </label>

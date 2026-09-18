@@ -40,12 +40,12 @@ export function PlacementsList() {
   const monthlyRevenue = filtered.filter((p) => p.status === 'active').reduce((sum, p) => sum + Number(p.bill_rate) * 160, 0)
 
   const columns: Column<Placement>[] = [
-    { key: 'candidate', header: 'Candidate', render: (p) => <span className="font-medium text-gray-100">{candidateName(p.candidate_id)}</span> },
+    { key: 'candidate', header: 'Candidate', render: (p) => <span className="font-medium text-gray-900">{candidateName(p.candidate_id)}</span> },
     { key: 'company', header: 'Company', render: (p) => companyName(p.company_id) },
     { key: 'position', header: 'Position', render: (p) => p.position ?? '—' },
     { key: 'pay', header: 'Pay Rate', render: (p) => `$${p.pay_rate}/hr` },
     { key: 'bill', header: 'Bill Rate', render: (p) => `$${p.bill_rate}/hr` },
-    { key: 'margin', header: 'Margin', render: (p) => <span className="font-medium text-green-400">${Number(p.margin).toFixed(2)}/hr</span> },
+    { key: 'margin', header: 'Margin', render: (p) => <span className="font-medium text-green-600">${Number(p.margin).toFixed(2)}/hr</span> },
     { key: 'status', header: 'Status', render: (p) => <Badge color={statusColor[p.status]}>{p.status.replace(/_/g, ' ')}</Badge> },
     { key: 'date', header: 'Placement Date', render: (p) => format(new Date(p.placement_date), 'MMM d, yyyy'), sortValue: (p) => p.placement_date },
   ]
@@ -59,17 +59,17 @@ export function PlacementsList() {
       />
 
       <div className="mb-4 grid grid-cols-3 gap-4">
-        <div className="rounded-xl border border-[#22232b] bg-[#14151a] p-4">
+        <div className="rounded-xl border border-[#e5e7eb] bg-[#ffffff] p-4">
           <p className="text-xs text-gray-500">Total Placements</p>
-          <p className="text-xl font-semibold text-gray-100">{filtered.length}</p>
+          <p className="text-xl font-semibold text-gray-900">{filtered.length}</p>
         </div>
-        <div className="rounded-xl border border-[#22232b] bg-[#14151a] p-4">
+        <div className="rounded-xl border border-[#e5e7eb] bg-[#ffffff] p-4">
           <p className="text-xs text-gray-500">Total Margin ($/hr, sum)</p>
-          <p className="text-xl font-semibold text-green-400">${totalMargin.toFixed(2)}</p>
+          <p className="text-xl font-semibold text-green-600">${totalMargin.toFixed(2)}</p>
         </div>
-        <div className="rounded-xl border border-[#22232b] bg-[#14151a] p-4">
+        <div className="rounded-xl border border-[#e5e7eb] bg-[#ffffff] p-4">
           <p className="text-xs text-gray-500">Est. Active Monthly Revenue</p>
-          <p className="text-xl font-semibold text-gray-100">${monthlyRevenue.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
+          <p className="text-xl font-semibold text-gray-900">${monthlyRevenue.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
         </div>
       </div>
 

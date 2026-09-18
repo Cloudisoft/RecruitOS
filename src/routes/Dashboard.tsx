@@ -96,9 +96,9 @@ export function Dashboard() {
         {kpis.map((kpi) => (
           <Card key={kpi.label}>
             <CardBody className="flex items-center gap-3">
-              <div className="rounded-lg bg-orange-500/10 p-2 text-orange-400"><kpi.icon className="h-5 w-5" /></div>
+              <div className="rounded-lg bg-orange-500/10 p-2 text-orange-600"><kpi.icon className="h-5 w-5" /></div>
               <div>
-                <p className="text-xl font-semibold text-gray-100">{kpi.value}</p>
+                <p className="text-xl font-semibold text-gray-900">{kpi.value}</p>
                 <p className="text-xs text-gray-500">{kpi.label}</p>
               </div>
             </CardBody>
@@ -109,13 +109,13 @@ export function Dashboard() {
       <div className="grid grid-cols-2 gap-5">
         <Card>
           <CardBody>
-            <h3 className="mb-4 text-sm font-semibold text-gray-300">Lead Funnel</h3>
+            <h3 className="mb-4 text-sm font-semibold text-gray-700">Lead Funnel</h3>
             <ResponsiveContainer width="100%" height={260}>
               <BarChart data={leadFunnelQuery.data ?? []}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#22232b" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
                 <XAxis dataKey="name" stroke="#6b7280" fontSize={11} interval={0} angle={-20} textAnchor="end" height={60} />
                 <YAxis stroke="#6b7280" fontSize={11} allowDecimals={false} />
-                <Tooltip contentStyle={{ background: '#16171d', border: '1px solid #26272f', fontSize: 12 }} />
+                <Tooltip contentStyle={{ background: '#ffffff', border: '1px solid #e5e7eb', fontSize: 12 }} />
                 <Bar dataKey="value" fill="#f97316" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
@@ -124,13 +124,13 @@ export function Dashboard() {
 
         <Card>
           <CardBody>
-            <h3 className="mb-4 text-sm font-semibold text-gray-300">Candidate Pipeline</h3>
+            <h3 className="mb-4 text-sm font-semibold text-gray-700">Candidate Pipeline</h3>
             <ResponsiveContainer width="100%" height={260}>
               <BarChart data={candidatePipelineQuery.data ?? []}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#22232b" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
                 <XAxis dataKey="name" stroke="#6b7280" fontSize={11} interval={0} angle={-20} textAnchor="end" height={60} />
                 <YAxis stroke="#6b7280" fontSize={11} allowDecimals={false} />
-                <Tooltip contentStyle={{ background: '#16171d', border: '1px solid #26272f', fontSize: 12 }} />
+                <Tooltip contentStyle={{ background: '#ffffff', border: '1px solid #e5e7eb', fontSize: 12 }} />
                 <Bar dataKey="value" fill="#3b82f6" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
@@ -139,7 +139,7 @@ export function Dashboard() {
 
         <Card className="col-span-2">
           <CardBody>
-            <h3 className="mb-4 text-sm font-semibold text-gray-300">Submission Funnel</h3>
+            <h3 className="mb-4 text-sm font-semibold text-gray-700">Submission Funnel</h3>
             {(submissionStatusQuery.data ?? []).length === 0 ? (
               <p className="py-10 text-center text-sm text-gray-500">No submissions yet</p>
             ) : (
@@ -148,7 +148,7 @@ export function Dashboard() {
                   <Pie data={submissionStatusQuery.data} dataKey="value" nameKey="name" outerRadius={90} label>
                     {(submissionStatusQuery.data ?? []).map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
                   </Pie>
-                  <Tooltip contentStyle={{ background: '#16171d', border: '1px solid #26272f', fontSize: 12 }} />
+                  <Tooltip contentStyle={{ background: '#ffffff', border: '1px solid #e5e7eb', fontSize: 12 }} />
                 </PieChart>
               </ResponsiveContainer>
             )}

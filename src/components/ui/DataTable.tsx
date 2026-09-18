@@ -77,10 +77,10 @@ export function DataTable<T extends { id: string }>({
   if (error) return <ErrorState message={error} onRetry={onRetry} />
 
   return (
-    <div className="overflow-hidden rounded-xl border border-[#22232b] bg-[#14151a]">
+    <div className="overflow-hidden rounded-xl border border-[#e5e7eb] bg-[#ffffff]">
       <div className="overflow-x-auto">
         <table className="w-full text-left text-sm">
-          <thead className="sticky top-0 z-10 bg-[#17181e] text-xs uppercase tracking-wide text-gray-500">
+          <thead className="sticky top-0 z-10 bg-[#f1f5f9] text-xs uppercase tracking-wide text-gray-500">
             <tr>
               {selectable && (
                 <th className="w-10 px-4 py-3">
@@ -91,7 +91,7 @@ export function DataTable<T extends { id: string }>({
                 <th
                   key={col.key}
                   onClick={() => col.sortValue && toggleSort(col.key)}
-                  className={`px-4 py-3 font-medium ${col.sortValue ? 'cursor-pointer select-none hover:text-gray-300' : ''}`}
+                  className={`px-4 py-3 font-medium ${col.sortValue ? 'cursor-pointer select-none hover:text-gray-700' : ''}`}
                 >
                   {col.header}
                   {sortKey === col.key && (sortDir === 'asc' ? ' ▲' : ' ▼')}
@@ -100,7 +100,7 @@ export function DataTable<T extends { id: string }>({
               {rowActions && <th className="w-12 px-4 py-3" />}
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#1c1d24]">
+          <tbody className="divide-y divide-[#e5e7eb]">
             {loading &&
               Array.from({ length: 5 }).map((_, i) => (
                 <tr key={i}>
@@ -114,7 +114,7 @@ export function DataTable<T extends { id: string }>({
                 <tr
                   key={row.id}
                   onClick={() => onRowClick?.(row)}
-                  className={`${onRowClick ? 'cursor-pointer hover:bg-white/[0.03]' : ''}`}
+                  className={`${onRowClick ? 'cursor-pointer hover:bg-black/[0.03]' : ''}`}
                 >
                   {selectable && (
                     <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>
@@ -122,7 +122,7 @@ export function DataTable<T extends { id: string }>({
                     </td>
                   )}
                   {columns.map((col) => (
-                    <td key={col.key} className="px-4 py-3 text-gray-300">
+                    <td key={col.key} className="px-4 py-3 text-gray-700">
                       {col.render(row)}
                     </td>
                   ))}
@@ -142,15 +142,15 @@ export function DataTable<T extends { id: string }>({
       )}
 
       {!loading && rows.length > pageSize && (
-        <div className="flex items-center justify-between border-t border-[#1c1d24] px-4 py-3 text-sm text-gray-400">
+        <div className="flex items-center justify-between border-t border-[#e5e7eb] px-4 py-3 text-sm text-gray-600">
           <span>
             Page {page + 1} of {pageCount} · {rows.length} records
           </span>
           <div className="flex gap-1">
-            <button disabled={page === 0} onClick={() => setPage((p) => p - 1)} className="rounded p-1.5 hover:bg-white/5 disabled:opacity-30">
+            <button disabled={page === 0} onClick={() => setPage((p) => p - 1)} className="rounded p-1.5 hover:bg-black/5 disabled:opacity-30">
               <ChevronLeft className="h-4 w-4" />
             </button>
-            <button disabled={page >= pageCount - 1} onClick={() => setPage((p) => p + 1)} className="rounded p-1.5 hover:bg-white/5 disabled:opacity-30">
+            <button disabled={page >= pageCount - 1} onClick={() => setPage((p) => p + 1)} className="rounded p-1.5 hover:bg-black/5 disabled:opacity-30">
               <ChevronRight className="h-4 w-4" />
             </button>
           </div>
@@ -164,13 +164,13 @@ function RowMenu({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false)
   return (
     <div className="relative inline-block">
-      <button onClick={() => setOpen((v) => !v)} className="rounded p-1.5 text-gray-500 hover:bg-white/5 hover:text-gray-300">
+      <button onClick={() => setOpen((v) => !v)} className="rounded p-1.5 text-gray-500 hover:bg-black/5 hover:text-gray-700">
         <MoreHorizontal className="h-4 w-4" />
       </button>
       {open && (
         <>
           <div className="fixed inset-0 z-30" onClick={() => setOpen(false)} />
-          <div className="absolute right-0 z-40 mt-1 w-44 rounded-lg border border-[#26272f] bg-[#16171d] py-1 shadow-xl" onClick={() => setOpen(false)}>
+          <div className="absolute right-0 z-40 mt-1 w-44 rounded-lg border border-[#e5e7eb] bg-[#ffffff] py-1 shadow-xl" onClick={() => setOpen(false)}>
             {children}
           </div>
         </>
@@ -183,7 +183,7 @@ export function RowMenuItem({ onClick, danger, children }: { onClick: () => void
   return (
     <button
       onClick={onClick}
-      className={`block w-full px-3 py-2 text-left text-sm hover:bg-white/5 ${danger ? 'text-red-400' : 'text-gray-300'}`}
+      className={`block w-full px-3 py-2 text-left text-sm hover:bg-black/5 ${danger ? 'text-red-600' : 'text-gray-700'}`}
     >
       {children}
     </button>

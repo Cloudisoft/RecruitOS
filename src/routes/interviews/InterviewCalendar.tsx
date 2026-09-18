@@ -27,9 +27,9 @@ export function InterviewCalendar({ interviews, onSelect }: { interviews: Interv
   }, [interviews])
 
   return (
-    <div className="rounded-xl border border-[#22232b] bg-[#14151a] p-4">
+    <div className="rounded-xl border border-[#e5e7eb] bg-[#ffffff] p-4">
       <div className="mb-3 flex items-center justify-between">
-        <h3 className="text-sm font-semibold text-gray-200">{format(month, 'MMMM yyyy')}</h3>
+        <h3 className="text-sm font-semibold text-gray-800">{format(month, 'MMMM yyyy')}</h3>
         <div className="flex gap-1">
           <Button variant="ghost" size="sm" onClick={() => setMonth((m) => subMonths(m, 1))}><ChevronLeft className="h-4 w-4" /></Button>
           <Button variant="ghost" size="sm" onClick={() => setMonth(new Date())}>Today</Button>
@@ -46,8 +46,8 @@ export function InterviewCalendar({ interviews, onSelect }: { interviews: Interv
           return (
             <div
               key={key}
-              className={`min-h-[86px] rounded-lg border border-[#1c1d24] p-1.5 text-left ${
-                isSameMonth(day, month) ? 'bg-[#101116]' : 'bg-transparent opacity-40'
+              className={`min-h-[86px] rounded-lg border border-[#e5e7eb] p-1.5 text-left ${
+                isSameMonth(day, month) ? 'bg-[#f8fafc]' : 'bg-transparent opacity-40'
               } ${isSameDay(day, new Date()) ? 'ring-1 ring-orange-500/50' : ''}`}
             >
               <p className="mb-1 text-[11px] text-gray-500">{format(day, 'd')}</p>
@@ -56,7 +56,7 @@ export function InterviewCalendar({ interviews, onSelect }: { interviews: Interv
                   <button
                     key={i.id}
                     onClick={() => onSelect(i)}
-                    className="block w-full truncate rounded bg-orange-500/10 px-1 py-0.5 text-left text-[10px] text-orange-300 hover:bg-orange-500/20"
+                    className="block w-full truncate rounded bg-orange-500/10 px-1 py-0.5 text-left text-[10px] text-orange-700 hover:bg-orange-500/20"
                   >
                     {format(new Date(i.scheduled_at), 'h:mma')} · {i.interview_type}
                   </button>

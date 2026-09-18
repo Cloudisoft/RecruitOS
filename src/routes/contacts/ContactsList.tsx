@@ -41,7 +41,7 @@ export function ContactsList() {
   }, [contacts, search, type])
 
   const columns: Column<Contact>[] = [
-    { key: 'name', header: 'Name', render: (c) => <span className="font-medium text-gray-100">{c.first_name} {c.last_name}</span>, sortValue: (c) => `${c.first_name} ${c.last_name}` },
+    { key: 'name', header: 'Name', render: (c) => <span className="font-medium text-gray-900">{c.first_name} {c.last_name}</span>, sortValue: (c) => `${c.first_name} ${c.last_name}` },
     { key: 'title', header: 'Title', render: (c) => c.title ?? '—' },
     { key: 'company', header: 'Company', render: (c) => companyName(c.company_id) },
     { key: 'email', header: 'Email', render: (c) => c.email ?? '—' },

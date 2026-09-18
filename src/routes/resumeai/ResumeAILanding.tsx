@@ -32,9 +32,9 @@ export function ResumeAILanding() {
           {filtered.map((c) => (
             <Card key={c.id} className="cursor-pointer hover:border-orange-500/40" >
               <CardBody onClick={() => navigate(`/candidates/${c.id}`)}>
-                <p className="font-medium text-gray-100">{c.first_name} {c.last_name}</p>
+                <p className="font-medium text-gray-900">{c.first_name} {c.last_name}</p>
                 <p className="text-sm text-gray-500">{c.primary_skill ?? c.current_title ?? '—'}</p>
-                <p className="mt-2 text-xs text-orange-400">Open Resume AI tab →</p>
+                <p className="mt-2 text-xs text-orange-600">Open Resume AI tab →</p>
               </CardBody>
             </Card>
           ))}

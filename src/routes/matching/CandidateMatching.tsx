@@ -67,13 +67,13 @@ export function CandidateMatching() {
       </Card>
 
       {statusQ.data && !statusQ.data.openai && job && (
-        <div className="mb-4 flex items-start gap-2 rounded-lg border border-yellow-600/30 bg-yellow-500/10 p-3 text-sm text-yellow-300">
+        <div className="mb-4 flex items-start gap-2 rounded-lg border border-yellow-600/30 bg-yellow-500/10 p-3 text-sm text-yellow-700">
           <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
           <span>AI-enhanced explanations need OPENAI_API_KEY set on the backend. The ranked list below is still real — it's computed from skill, work-mode, and availability data, just without the plain-language write-up.</span>
         </div>
       )}
       {aiError && (
-        <div className="mb-4 flex items-start gap-2 rounded-lg border border-red-600/30 bg-red-500/10 p-3 text-sm text-red-300">
+        <div className="mb-4 flex items-start gap-2 rounded-lg border border-red-600/30 bg-red-500/10 p-3 text-sm text-red-700">
           <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" /><span>{aiError}</span>
         </div>
       )}
@@ -88,7 +88,7 @@ export function CandidateMatching() {
             <Card key={c.id}>
               <CardBody>
                 <div className="flex items-center justify-between">
-                  <button onClick={() => navigate(`/candidates/${c.id}`)} className="text-sm font-medium text-gray-100 hover:text-orange-400">
+                  <button onClick={() => navigate(`/candidates/${c.id}`)} className="text-sm font-medium text-gray-900 hover:text-orange-600">
                     {c.first_name} {c.last_name}
                   </button>
                   <Badge color={score >= 70 ? 'green' : score >= 40 ? 'orange' : 'gray'}>{score}% match</Badge>
@@ -98,10 +98,10 @@ export function CandidateMatching() {
                   {missing.map((m) => <Badge key={m} color="red">missing: {m}</Badge>)}
                 </div>
                 {explanations[c.id] && (
-                  <div className="mt-3 rounded-lg bg-white/[0.02] p-3 text-sm">
-                    <p className="text-gray-300">{explanations[c.id].summary}</p>
+                  <div className="mt-3 rounded-lg bg-black/[0.02] p-3 text-sm">
+                    <p className="text-gray-700">{explanations[c.id].summary}</p>
                     {explanations[c.id].concerns.length > 0 && (
-                      <ul className="mt-2 list-inside list-disc text-yellow-300">
+                      <ul className="mt-2 list-inside list-disc text-yellow-700">
                         {explanations[c.id].concerns.map((concern, i) => <li key={i}>{concern}</li>)}
                       </ul>
                     )}
