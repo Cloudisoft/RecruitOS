@@ -15,40 +15,36 @@ export function Integrations() {
 
   if (statusQ.isLoading) return <LoadingState />
 
-  const provider = statusQ.data?.aiProvider ?? 'openai'
-  const providerLabel = provider === 'anthropic' ? 'Anthropic (Claude)' : 'OpenAI'
-  const providerEnvVar = provider === 'anthropic' ? 'ANTHROPIC_API_KEY' : 'OPENAI_API_KEY'
-
   const rows = [
     {
       icon: Database,
-      name: 'Supabase (frontend)',
+      name: 'Application Database',
       configured: isSupabaseConfigured,
-      description: 'VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY — required for the app to function at all.',
+      description: 'Core data storage — required for the app to function at all.',
     },
     {
       icon: Database,
-      name: 'Supabase (backend, service role)',
+      name: 'Server Database Access',
       configured: statusQ.data?.supabaseAdmin ?? false,
-      description: 'SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY — required for Resume AI, Copilot, and AI matching to read/write on the server.',
+      description: 'Required for Resume AI, Copilot, and AI matching to read/write on the server.',
     },
     {
       icon: Bot,
-      name: `AI provider: ${providerLabel}`,
+      name: 'AI Engine',
       configured: statusQ.data?.openai ?? false,
-      description: `${providerEnvVar} — powers Resume AI (parse/analyze/enhance/generate), AI Copilot, and AI-enhanced candidate matching. Switch providers by setting AI_PROVIDER=openai|anthropic on the backend.`,
+      description: 'Powers Resume AI (parse/analyze/enhance/generate), AI Copilot, and AI-enhanced candidate matching.',
     },
     {
       icon: Mail,
-      name: 'Email (Resend)',
+      name: 'Email Delivery',
       configured: statusQ.data?.email ?? false,
-      description: 'RESEND_API_KEY / EMAIL_FROM_ADDRESS — required to actually send email from the Email module and marketing campaigns.',
+      description: 'Required to actually send email from the Email module and marketing campaigns.',
     },
   ]
 
   return (
     <div>
-      <PageHeader title="Integrations" description="Live configuration status — set these as environment variables on your Railway service" />
+      <PageHeader title="Integrations" description="Live configuration status for this workspace" />
       <div className="space-y-3">
         {rows.map((r) => (
           <Card key={r.name}>
