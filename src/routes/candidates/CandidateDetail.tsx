@@ -12,6 +12,7 @@ import { Button } from '../../components/ui/Button'
 import { EntityTimeline } from '../../components/EntityTimeline'
 import { CandidateDocuments } from './CandidateDocuments'
 import { CandidateMarketing } from './CandidateMarketing'
+import { CandidateResumeAI } from './CandidateResumeAI'
 import { CandidateForm } from './CandidateForm'
 import { useOrgUsers, userLabel } from '../../lib/useOrgUsers'
 import { benchAgeBucket, benchAgeDays } from '../../lib/benchAging'
@@ -81,6 +82,7 @@ export function CandidateDetail() {
                 ),
               },
               { label: 'Documents', content: <CandidateDocuments candidateId={candidate.id} /> },
+              { label: 'Resume AI', content: <CandidateResumeAI candidateId={candidate.id} /> },
               { label: 'Marketing', content: <CandidateMarketing candidateId={candidate.id} /> },
               {
                 label: 'Submissions',

@@ -10,16 +10,29 @@ import type { Task } from '../../lib/domain'
 const statuses = ['backlog', 'to_do', 'in_progress', 'blocked', 'review', 'done']
 const priorities = ['lowest', 'low', 'medium', 'high', 'critical']
 
-export function TaskForm({ open, onClose, task }: { open: boolean; onClose: () => void; task?: Task | null }) {
+export function TaskForm({
+  open, onClose, task, defaultProjectId, defaultRelatedEntityType, defaultRelatedEntityId,
+}: {
+  open: boolean; onClose: () => void; task?: Task | null
+  defaultProjectId?: string; defaultRelatedEntityType?: string; defaultRelatedEntityId?: string
+}) {
   const { profile } = useAuth()
   const { data: users } = useOrgUsers()
   const create = taskHooks.useCreate()
   const update = taskHooks.useUpdate()
   const [form, setForm] = useState<Partial<Task>>({})
+  const isEdit = !!task?.id
 
   useEffect(() => {
-    setForm(task ?? { title: '', status: 'to_do', priority: 'medium', assignee_id: profile?.id ?? null, reporter_id: profile?.id ?? null })
-  }, [task, open, profile?.id])
+    setForm(
+      task ?? {
+        title: '', status: 'to_do', priority: 'medium', assignee_id: profile?.id ?? null, reporter_id: profile?.id ?? null,
+        project_id: defaultProjectId ?? null,
+        related_entity_type: defaultRelatedEntityType ?? null,
+        related_entity_id: defaultRelatedEntityId ?? null,
+      }
+    )
+  }, [task, open, profile?.id, defaultProjectId, defaultRelatedEntityType, defaultRelatedEntityId])
 
   function set<K extends keyof Task>(key: K, value: Task[K]) {
     setForm((f) => ({ ...f, [key]: value }))
@@ -27,7 +40,7 @@ export function TaskForm({ open, onClose, task }: { open: boolean; onClose: () =
 
   async function submit() {
     if (!form.title) return
-    if (task) await update.mutateAsync({ id: task.id, ...form } as any)
+    if (isEdit) await update.mutateAsync({ id: task!.id, ...form } as any)
     else await create.mutateAsync({ ...form, org_id: profile?.org_id } as any)
     onClose()
   }
@@ -35,10 +48,10 @@ export function TaskForm({ open, onClose, task }: { open: boolean; onClose: () =
   const saving = create.isPending || update.isPending
 
   return (
-    <Modal open={open} onClose={onClose} title={task ? 'Edit Task' : 'New Task'} size="lg" footer={
+    <Modal open={open} onClose={onClose} title={isEdit ? 'Edit Task' : 'New Task'} size="lg" footer={
       <>
         <Button variant="secondary" onClick={onClose}>Cancel</Button>
-        <Button onClick={submit} loading={saving}>{task ? 'Save changes' : 'Create task'}</Button>
+        <Button onClick={submit} loading={saving}>{isEdit ? 'Save changes' : 'Create task'}</Button>
       </>
     }>
       <div className="grid grid-cols-2 gap-4">

@@ -3,7 +3,7 @@ import {
   LayoutDashboard, Target, Users, Building2, KanbanSquare, UserSquare2, Briefcase,
   SendHorizonal, CalendarClock, Award, Bot, FileText, Sparkles, BarChart3,
   FolderKanban, ListTodo, Receipt, TrendingUp, Workflow, Building, UsersRound,
-  Mail, Plug, CreditCard, ScrollText,
+  Mail, Plug, CreditCard, ScrollText, ShieldCheck,
 } from 'lucide-react'
 
 export interface NavItem {
@@ -30,45 +30,47 @@ export const navSections: NavSection[] = [
       { label: 'Candidates', path: '/candidates', icon: UserSquare2, implemented: true },
       { label: 'Jobs / Requirements', path: '/jobs', icon: Briefcase, implemented: true },
       { label: 'Submissions', path: '/submissions', icon: SendHorizonal, implemented: true },
-      { label: 'Interviews', path: '/interviews', icon: CalendarClock, implemented: false },
-      { label: 'Placements', path: '/placements', icon: Award, implemented: false },
+      { label: 'Interviews', path: '/interviews', icon: CalendarClock, implemented: true },
+      { label: 'Offers', path: '/offers', icon: Award, implemented: true },
+      { label: 'Background Checks', path: '/background-checks', icon: ShieldCheck, implemented: true },
+      { label: 'Placements', path: '/placements', icon: Award, implemented: true },
     ],
   },
   {
     title: 'INTELLIGENCE',
     items: [
-      { label: 'AI Copilot', path: '/copilot', icon: Bot, implemented: false },
-      { label: 'Resume AI', path: '/resume-ai', icon: FileText, implemented: false },
-      { label: 'Candidate Matching', path: '/matching', icon: Sparkles, implemented: false },
-      { label: 'Reports', path: '/reports', icon: BarChart3, implemented: false },
+      { label: 'AI Copilot', path: '/copilot', icon: Bot, implemented: true },
+      { label: 'Resume AI', path: '/resume-ai', icon: FileText, implemented: true },
+      { label: 'Candidate Matching', path: '/matching', icon: Sparkles, implemented: true },
+      { label: 'Reports', path: '/reports', icon: BarChart3, implemented: true },
     ],
   },
   {
     title: 'WORK',
     items: [
-      { label: 'Projects', path: '/projects', icon: FolderKanban, implemented: false },
+      { label: 'Projects', path: '/projects', icon: FolderKanban, implemented: true },
       { label: 'Tasks', path: '/tasks', icon: ListTodo, implemented: true },
     ],
   },
   {
     title: 'FINANCE',
     items: [
-      { label: 'Invoices', path: '/invoices', icon: Receipt, implemented: false },
-      { label: 'Sales / Revenue', path: '/revenue', icon: TrendingUp, implemented: false },
+      { label: 'Invoices', path: '/invoices', icon: Receipt, implemented: true },
+      { label: 'Sales / Revenue', path: '/revenue', icon: TrendingUp, implemented: true },
     ],
   },
   {
     title: 'AUTOMATION',
-    items: [{ label: 'Automation Builder', path: '/automation', icon: Workflow, implemented: false }],
+    items: [{ label: 'Automation Builder', path: '/automation', icon: Workflow, implemented: true }],
   },
   {
     title: 'SETTINGS',
     items: [
       { label: 'Organization', path: '/settings/organization', icon: Building, implemented: true },
       { label: 'Team', path: '/settings/team', icon: UsersRound, implemented: true },
-      { label: 'Email', path: '/settings/email', icon: Mail, implemented: false },
-      { label: 'Integrations', path: '/settings/integrations', icon: Plug, implemented: false },
-      { label: 'Billing', path: '/settings/billing', icon: CreditCard, implemented: false },
+      { label: 'Email', path: '/settings/email', icon: Mail, implemented: true },
+      { label: 'Integrations', path: '/settings/integrations', icon: Plug, implemented: true },
+      { label: 'Billing', path: '/settings/billing', icon: CreditCard, implemented: true },
       { label: 'Audit Logs', path: '/settings/audit-logs', icon: ScrollText, implemented: true },
     ],
   },

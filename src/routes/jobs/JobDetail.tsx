@@ -13,6 +13,7 @@ import { EntityTimeline } from '../../components/EntityTimeline'
 import { JobForm } from './JobForm'
 import { SubmissionForm } from '../submissions/SubmissionForm'
 import { useOrgUsers, userLabel } from '../../lib/useOrgUsers'
+import { computeMatches } from '../../lib/matching'
 import { Pencil, SendHorizonal } from 'lucide-react'
 
 export function JobDetail() {
@@ -35,23 +36,7 @@ export function JobDetail() {
     },
   })
 
-  const suggestions = useMemo(() => {
-    if (!job || !candidates) return []
-    const required = (job.required_skills ?? []).map((s) => s.toLowerCase())
-    return candidates
-      .map((c) => {
-        const candSkills = [c.primary_skill, ...(c.secondary_skills ?? [])].filter(Boolean).map((s) => (s as string).toLowerCase())
-        const matched = required.filter((r) => candSkills.some((cs) => cs.includes(r) || r.includes(cs)))
-        const missing = required.filter((r) => !matched.includes(r))
-        let score = required.length ? Math.round((matched.length / required.length) * 100) : 0
-        if (job.work_mode !== 'any' && c.preferred_work_mode !== 'any' && c.preferred_work_mode !== job.work_mode) score -= 10
-        if (c.status === 'placed' || c.status === 'inactive') score -= 30
-        return { candidate: c, score: Math.max(0, score), matched, missing }
-      })
-      .filter((s) => s.score > 0)
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 10)
-  }, [job, candidates])
+  const suggestions = useMemo(() => (job && candidates ? computeMatches(job, candidates) : []), [job, candidates])
 
   if (isLoading) return <LoadingState />
   if (error || !job) return <ErrorState message={(error as Error)?.message ?? 'Job not found'} onRetry={refetch} />

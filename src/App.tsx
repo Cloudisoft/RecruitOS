@@ -22,9 +22,25 @@ import { JobsList } from './routes/jobs/JobsList'
 import { JobDetail } from './routes/jobs/JobDetail'
 import { SubmissionsList } from './routes/submissions/SubmissionsList'
 import { TasksBoard } from './routes/tasks/TasksBoard'
+import { InterviewsList } from './routes/interviews/InterviewsList'
+import { OffersList } from './routes/offers/OffersList'
+import { BackgroundChecksList } from './routes/backgroundchecks/BackgroundChecksList'
+import { PlacementsList } from './routes/placements/PlacementsList'
+import { ProjectsList } from './routes/projects/ProjectsList'
+import { ProjectDetail } from './routes/projects/ProjectDetail'
+import { InvoicesList } from './routes/invoices/InvoicesList'
+import { RevenuePage } from './routes/invoices/RevenuePage'
+import { Reports } from './routes/reports/Reports'
+import { Copilot } from './routes/copilot/Copilot'
+import { ResumeAILanding } from './routes/resumeai/ResumeAILanding'
+import { CandidateMatching } from './routes/matching/CandidateMatching'
+import { AutomationBuilder } from './routes/automation/AutomationBuilder'
 import { OrganizationSettings } from './routes/settings/OrganizationSettings'
 import { TeamSettings } from './routes/settings/TeamSettings'
 import { AuditLogs } from './routes/settings/AuditLogs'
+import { EmailSettings } from './routes/settings/EmailSettings'
+import { Integrations } from './routes/settings/Integrations'
+import { Billing } from './routes/settings/Billing'
 
 export default function App() {
   return (
@@ -60,10 +76,30 @@ export default function App() {
 
               <Route path="/submissions" element={<SubmissionsList />} />
 
+              <Route path="/interviews" element={<InterviewsList />} />
+              <Route path="/offers" element={<OffersList />} />
+              <Route path="/background-checks" element={<BackgroundChecksList />} />
+              <Route path="/placements" element={<ProtectedRoute requireRole={['admin', 'global_admin']}><PlacementsList /></ProtectedRoute>} />
+
+              <Route path="/copilot" element={<Copilot />} />
+              <Route path="/resume-ai" element={<ResumeAILanding />} />
+              <Route path="/matching" element={<CandidateMatching />} />
+              <Route path="/reports" element={<Reports />} />
+
+              <Route path="/projects" element={<ProjectsList />} />
+              <Route path="/projects/:id" element={<ProjectDetail />} />
               <Route path="/tasks" element={<TasksBoard />} />
+
+              <Route path="/invoices" element={<InvoicesList />} />
+              <Route path="/revenue" element={<RevenuePage />} />
+
+              <Route path="/automation" element={<ProtectedRoute requireRole={['admin', 'global_admin']}><AutomationBuilder /></ProtectedRoute>} />
 
               <Route path="/settings/organization" element={<OrganizationSettings />} />
               <Route path="/settings/team" element={<TeamSettings />} />
+              <Route path="/settings/email" element={<EmailSettings />} />
+              <Route path="/settings/integrations" element={<ProtectedRoute requireRole={['admin', 'global_admin']}><Integrations /></ProtectedRoute>} />
+              <Route path="/settings/billing" element={<ProtectedRoute requireRole={['admin', 'global_admin']}><Billing /></ProtectedRoute>} />
               <Route path="/settings/audit-logs" element={<ProtectedRoute requireRole={['admin', 'global_admin']}><AuditLogs /></ProtectedRoute>} />
             </Route>
 

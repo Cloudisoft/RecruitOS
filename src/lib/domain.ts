@@ -344,3 +344,186 @@ export interface Note {
   created_at: string
   updated_at: string
 }
+
+export type InterviewType = 'phone' | 'video' | 'technical' | 'hr' | 'client' | 'final' | 'other'
+export type InterviewStatus = 'scheduled' | 'confirmed' | 'completed' | 'rescheduled' | 'cancelled' | 'no_show'
+
+export interface Interview {
+  id: string
+  org_id: string
+  submission_id: string | null
+  candidate_id: string
+  job_id: string | null
+  company_id: string | null
+  interviewer_contact_id: string | null
+  interview_type: InterviewType
+  scheduled_at: string
+  timezone: string
+  meeting_url: string | null
+  location: string | null
+  round: number
+  status: InterviewStatus
+  feedback: string | null
+  result: string | null
+  notes: string | null
+  created_by: string | null
+  created_at: string
+  updated_at: string
+}
+
+export type OfferStatus = 'draft' | 'presented' | 'accepted' | 'declined' | 'withdrawn'
+
+export interface Offer {
+  id: string
+  org_id: string
+  candidate_id: string
+  job_id: string | null
+  company_id: string | null
+  submission_id: string | null
+  offer_date: string
+  start_date: string | null
+  position: string | null
+  rate: number | null
+  employment_type: EmploymentType
+  contract_duration: string | null
+  location: string | null
+  manager: string | null
+  status: OfferStatus
+  offer_document_path: string | null
+  created_by: string | null
+  created_at: string
+  updated_at: string
+}
+
+export type VerificationType =
+  | 'identity' | 'employment' | 'education' | 'criminal' | 'reference' | 'work_authorization' | 'address' | 'other'
+export type BackgroundCheckStatus =
+  | 'not_started' | 'initiated' | 'in_progress' | 'passed' | 'failed' | 'needs_review' | 'completed'
+
+export interface BackgroundCheck {
+  id: string
+  org_id: string
+  candidate_id: string
+  company_id: string | null
+  offer_id: string | null
+  verification_provider: string | null
+  verification_type: VerificationType
+  initiated_at: string | null
+  completed_at: string | null
+  status: BackgroundCheckStatus
+  result: string | null
+  notes: string | null
+  created_by: string | null
+  created_at: string
+  updated_at: string
+}
+
+export type PlacementStatus = 'pending_start' | 'active' | 'completed' | 'terminated'
+
+export interface Placement {
+  id: string
+  org_id: string
+  candidate_id: string
+  company_id: string | null
+  job_id: string | null
+  offer_id: string | null
+  submission_id: string | null
+  placement_date: string
+  start_date: string | null
+  position: string | null
+  recruiter_id: string | null
+  sales_owner_id: string | null
+  pay_rate: number
+  bill_rate: number
+  margin: number
+  contract_type: EmploymentType
+  status: PlacementStatus
+  guarantee_period_days: number | null
+  notes: string | null
+  created_by: string | null
+  created_at: string
+  updated_at: string
+}
+
+export interface Project {
+  id: string
+  org_id: string
+  name: string
+  description: string | null
+  owner_id: string | null
+  start_date: string | null
+  end_date: string | null
+  status: string
+  priority: TaskPriority
+  created_by: string | null
+  created_at: string
+  updated_at: string
+}
+
+export type InvoiceStatus = 'draft' | 'sent' | 'paid' | 'overdue' | 'void'
+
+export interface Invoice {
+  id: string
+  org_id: string
+  placement_id: string | null
+  company_id: string | null
+  invoice_number: string
+  amount: number
+  status: InvoiceStatus
+  issue_date: string
+  due_date: string | null
+  paid_date: string | null
+  created_by: string | null
+  created_at: string
+  updated_at: string
+}
+
+export interface RevenueRecord {
+  id: string
+  org_id: string
+  placement_id: string | null
+  company_id: string | null
+  candidate_id: string | null
+  recruiter_id: string | null
+  sales_owner_id: string | null
+  period_month: string
+  bill_amount: number
+  pay_amount: number
+  margin_amount: number
+  created_at: string
+}
+
+export interface Automation {
+  id: string
+  org_id: string
+  name: string
+  description: string | null
+  trigger_entity: string
+  trigger_event: string
+  trigger_condition: Record<string, unknown>
+  is_active: boolean
+  created_by: string | null
+  created_at: string
+  updated_at: string
+}
+
+export interface AutomationAction {
+  id: string
+  automation_id: string
+  action_type: string
+  action_params: Record<string, unknown>
+  position: number
+  created_at: string
+}
+
+export interface EmailTemplate {
+  id: string
+  org_id: string
+  name: string
+  category: string
+  subject: string
+  body_html: string
+  created_by: string | null
+  created_at: string
+  updated_at: string
+}
