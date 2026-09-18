@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import type { AuthedRequest } from '../middleware/auth.js'
 import { supabaseAdmin } from '../lib/supabaseAdmin.js'
-import { openai, isOpenAIConfigured, CHAT_MODEL } from '../lib/openai.js'
+import { completeJson, isAIConfigured, activeProvider } from '../lib/ai.js'
 import { extractText } from '../lib/textExtract.js'
 
 export const resumeRouter = Router()
@@ -34,31 +34,18 @@ const ANALYSIS_SYSTEM_PROMPT = `You are a resume reviewer for a US IT staffing r
 
 const ENHANCE_SYSTEM_PROMPT = `You are a resume editor for a US IT staffing recruiter. You may rephrase, reorganize, and tighten wording for clarity and ATS-friendliness, and reorder/emphasize existing bullet points relevant to a target role. You must NEVER invent, add, or imply any employer, job title, employment date, degree, certification, project, or skill that is not already present in the candidate's original resume data provided to you. If asked to strengthen a section but there is no underlying content to draw from, leave it unchanged rather than fabricating content. Respond with strict JSON matching the same shape as the input "resume" object, with only wording-level edits.`
 
-function requireOpenAI(res: any) {
-  if (!isOpenAIConfigured || !openai) {
-    res.status(503).json({ error: 'OpenAI is not configured on this server. Set OPENAI_API_KEY.' })
+function requireAI(res: any) {
+  if (!isAIConfigured) {
+    const envVar = activeProvider === 'anthropic' ? 'ANTHROPIC_API_KEY' : 'OPENAI_API_KEY'
+    res.status(503).json({ error: `AI (${activeProvider}) is not configured on this server. Set ${envVar}.` })
     return false
   }
   return true
 }
 
-async function jsonCompletion(system: string, user: string) {
-  const completion = await openai!.chat.completions.create({
-    model: CHAT_MODEL,
-    response_format: { type: 'json_object' },
-    messages: [
-      { role: 'system', content: system },
-      { role: 'user', content: user },
-    ],
-  })
-  const content = completion.choices[0]?.message?.content
-  if (!content) throw new Error('Empty response from OpenAI')
-  return JSON.parse(content)
-}
-
 // POST /api/resume/parse { candidateId, documentId }
 resumeRouter.post('/parse', async (req: AuthedRequest, res) => {
-  if (!requireOpenAI(res)) return
+  if (!requireAI(res)) return
   const { candidateId, documentId } = req.body as { candidateId?: string; documentId?: string }
   if (!candidateId || !documentId) {
     res.status(400).json({ error: 'candidateId and documentId are required' })
@@ -92,7 +79,7 @@ resumeRouter.post('/parse', async (req: AuthedRequest, res) => {
       return
     }
 
-    const parsed = await jsonCompletion(PARSE_SYSTEM_PROMPT, rawText.slice(0, 15000))
+    const parsed = await completeJson(PARSE_SYSTEM_PROMPT, rawText.slice(0, 15000))
 
     const { data: resume, error: resumeError } = await supabaseAdmin
       .from('resumes')
@@ -124,7 +111,7 @@ resumeRouter.post('/parse', async (req: AuthedRequest, res) => {
 
 // POST /api/resume/analyze { resumeId, targetJobDescription? }
 resumeRouter.post('/analyze', async (req: AuthedRequest, res) => {
-  if (!requireOpenAI(res)) return
+  if (!requireAI(res)) return
   const { resumeId, targetJobDescription } = req.body as { resumeId?: string; targetJobDescription?: string }
   if (!resumeId) {
     res.status(400).json({ error: 'resumeId is required' })
@@ -138,7 +125,7 @@ resumeRouter.post('/analyze', async (req: AuthedRequest, res) => {
 
   try {
     const userPrompt = `Resume data:\n${JSON.stringify(resume.parsed_data)}\n\nTarget job description:\n${targetJobDescription || '(none provided — do a general ATS/quality review)'}`
-    const analysis = await jsonCompletion(ANALYSIS_SYSTEM_PROMPT, userPrompt)
+    const analysis = await completeJson(ANALYSIS_SYSTEM_PROMPT, userPrompt)
 
     const { error: updateError } = await supabaseAdmin.from('resumes').update({ analysis }).eq('id', resumeId)
     if (updateError) throw updateError
@@ -151,7 +138,7 @@ resumeRouter.post('/analyze', async (req: AuthedRequest, res) => {
 
 // POST /api/resume/enhance { resumeId, instructions? } -> returns a DRAFT for recruiter approval, does not save
 resumeRouter.post('/enhance', async (req: AuthedRequest, res) => {
-  if (!requireOpenAI(res)) return
+  if (!requireAI(res)) return
   const { resumeId, instructions } = req.body as { resumeId?: string; instructions?: string }
   if (!resumeId) {
     res.status(400).json({ error: 'resumeId is required' })
@@ -165,7 +152,7 @@ resumeRouter.post('/enhance', async (req: AuthedRequest, res) => {
 
   try {
     const userPrompt = `Original resume data (the ONLY source of truth — do not add anything beyond this):\n${JSON.stringify(resume.parsed_data)}\n\nRecruiter instructions: ${instructions || 'Improve clarity and ATS-friendliness.'}`
-    const enhanced = await jsonCompletion(ENHANCE_SYSTEM_PROMPT, userPrompt)
+    const enhanced = await completeJson(ENHANCE_SYSTEM_PROMPT, userPrompt)
     res.json({ draft: enhanced })
   } catch (e: any) {
     res.status(500).json({ error: e.message ?? 'Resume enhancement failed' })
@@ -228,7 +215,7 @@ resumeRouter.post('/versions/approve', async (req: AuthedRequest, res) => {
 
 // POST /api/resume/generate { candidateId, targetJobTitle, targetJobDescription, template }
 resumeRouter.post('/generate', async (req: AuthedRequest, res) => {
-  if (!requireOpenAI(res)) return
+  if (!requireAI(res)) return
   const { candidateId, targetJobTitle, targetJobDescription } = req.body as {
     candidateId?: string; targetJobTitle?: string; targetJobDescription?: string
   }
@@ -252,7 +239,7 @@ resumeRouter.post('/generate', async (req: AuthedRequest, res) => {
 
   try {
     const userPrompt = `Candidate's actual resume data (the ONLY source of truth — do not add anything beyond this):\n${JSON.stringify(resume.parsed_data)}\n\nTailor the presentation and ordering for this target role, without inventing new experience:\nTarget title: ${targetJobTitle || '(none)'}\nTarget job description: ${targetJobDescription || '(none)'}`
-    const draft = await jsonCompletion(ENHANCE_SYSTEM_PROMPT, userPrompt)
+    const draft = await completeJson(ENHANCE_SYSTEM_PROMPT, userPrompt)
     res.json({ draft, resumeId: resume.id })
   } catch (e: any) {
     res.status(500).json({ error: e.message ?? 'Resume generation failed' })

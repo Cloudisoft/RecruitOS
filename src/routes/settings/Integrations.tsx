@@ -10,10 +10,14 @@ import { Bot, Mail, Database, CheckCircle2, XCircle } from 'lucide-react'
 export function Integrations() {
   const statusQ = useQuery({
     queryKey: ['integration-status'],
-    queryFn: async () => api.get<{ openai: boolean; email: boolean; supabaseAdmin: boolean }>('/status'),
+    queryFn: async () => api.get<{ openai: boolean; aiProvider: 'openai' | 'anthropic'; email: boolean; supabaseAdmin: boolean }>('/status'),
   })
 
   if (statusQ.isLoading) return <LoadingState />
+
+  const provider = statusQ.data?.aiProvider ?? 'openai'
+  const providerLabel = provider === 'anthropic' ? 'Anthropic (Claude)' : 'OpenAI'
+  const providerEnvVar = provider === 'anthropic' ? 'ANTHROPIC_API_KEY' : 'OPENAI_API_KEY'
 
   const rows = [
     {
@@ -30,9 +34,9 @@ export function Integrations() {
     },
     {
       icon: Bot,
-      name: 'OpenAI',
+      name: `AI provider: ${providerLabel}`,
       configured: statusQ.data?.openai ?? false,
-      description: 'OPENAI_API_KEY — powers Resume AI (parse/analyze/enhance/generate), AI Copilot, and AI-enhanced candidate matching.',
+      description: `${providerEnvVar} — powers Resume AI (parse/analyze/enhance/generate), AI Copilot, and AI-enhanced candidate matching. Switch providers by setting AI_PROVIDER=openai|anthropic on the backend.`,
     },
     {
       icon: Mail,

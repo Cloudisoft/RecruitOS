@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import type { AuthedRequest } from '../middleware/auth.js'
 import { supabaseAdmin } from '../lib/supabaseAdmin.js'
-import { openai, isOpenAIConfigured, CHAT_MODEL } from '../lib/openai.js'
+import { completeChat, isAIConfigured, activeProvider } from '../lib/ai.js'
 
 export const copilotRouter = Router()
 
@@ -69,8 +69,9 @@ async function buildContextSnapshot(user: NonNullable<AuthedRequest['user']>) {
 }
 
 copilotRouter.post('/chat', async (req: AuthedRequest, res) => {
-  if (!isOpenAIConfigured || !openai) {
-    res.status(503).json({ error: 'AI Copilot is not configured on this server. Set OPENAI_API_KEY.' })
+  if (!isAIConfigured) {
+    const envVar = activeProvider === 'anthropic' ? 'ANTHROPIC_API_KEY' : 'OPENAI_API_KEY'
+    res.status(503).json({ error: `AI Copilot is not configured on this server. Set ${envVar}.` })
     return
   }
   const { message, history } = req.body as { message?: string; history?: { role: 'user' | 'assistant'; content: string }[] }
@@ -81,16 +82,8 @@ copilotRouter.post('/chat', async (req: AuthedRequest, res) => {
 
   try {
     const snapshot = await buildContextSnapshot(req.user!)
-    const completion = await openai.chat.completions.create({
-      model: CHAT_MODEL,
-      messages: [
-        { role: 'system', content: SYSTEM_PROMPT },
-        { role: 'system', content: `Data snapshot (JSON):\n${JSON.stringify(snapshot)}` },
-        ...(history ?? []).slice(-10),
-        { role: 'user', content: message },
-      ],
-    })
-    const reply = completion.choices[0]?.message?.content ?? '(no response)'
+    const system = `${SYSTEM_PROMPT}\n\nData snapshot (JSON):\n${JSON.stringify(snapshot)}`
+    const reply = await completeChat(system, [...(history ?? []).slice(-10), { role: 'user', content: message }])
     res.json({ reply })
   } catch (e: any) {
     res.status(500).json({ error: e.message ?? 'Copilot request failed' })
